@@ -109,7 +109,7 @@ def main():
     argv = None
 
     ## Set of test arguments, uncomment to try the crawler
-    argv = ["cookiebot", "-u", "https://purplemath.com/", "-u", "https://gamefly.com/", "-n", "2"]
+    # argv = ["cookiebot", "-u", "https://purplemath.com/", "-u", "https://gamefly.com/", "-n", "2"]
     # argv = ["onetrust", "-n", "5", "-u", "https://www.metabomb.net/", "-u", "https://www.maytag.com/", "-u", "https://www.aveda.com/", "-u", "https://www.equipmenttrader.com/", "-u", "https://www.tiffany.com/"]
     # argv = ["all", "-n", "3", "-u", "https://www.equipmenttrader.com/"]
 
