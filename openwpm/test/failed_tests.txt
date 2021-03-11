@@ -1,0 +1,13 @@
+==================================================================================== short test summary info =====================================================================================
+FAILED test_simple_commands.py::TestSimpleCommands::test_get_site_visits_table_valid[xvfb] - sqlite3.ProgrammingError: Cannot operate on a closed database.
+FAILED test_simple_commands.py::TestSimpleCommands::test_get_http_tables_valid[xvfb] - sqlite3.ProgrammingError: Cannot operate on a closed database.
+FAILED test_simple_commands.py::TestSimpleCommands::test_browse_site_visits_table_valid[xvfb] - sqlite3.ProgrammingError: Cannot operate on a closed database.
+FAILED test_simple_commands.py::TestSimpleCommands::test_browse_http_table_valid[xvfb] - sqlite3.ProgrammingError: Cannot operate on a closed database.
+FAILED test_simple_commands.py::TestSimpleCommands::test_browse_wrapper_http_table_valid[xvfb] - sqlite3.ProgrammingError: Cannot operate on a closed database.
+FAILED test_simple_commands.py::TestSimpleCommands::test_save_screenshot_valid[xvfb] - sqlite3.ProgrammingError: Cannot operate on a closed database.
+FAILED test_simple_commands.py::TestSimpleCommands::test_dump_page_source_valid[xvfb] - sqlite3.ProgrammingError: Cannot operate on a closed database.
+FAILED test_simple_commands.py::TestSimpleCommands::test_recursive_dump_page_source_valid[xvfb] - sqlite3.ProgrammingError: Cannot operate on a closed database.
+ERROR test_s3_aggregator.py::TestS3Aggregator::test_basic_properties - TypeError: 'NoneType' object is not subscriptable
+ERROR test_s3_aggregator.py::TestS3Aggregator::test_commit_on_timeout - TypeError: 'NoneType' object is not subscriptable
+ERROR test_s3_aggregator.py::TestS3Aggregator::test_s3_callbacks - TypeError: 'NoneType' object is not subscriptable
+
