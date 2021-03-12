@@ -261,16 +261,18 @@ This project is released under the GPLv3, see the included LICENSE file.
 
 ---
 
-The webcrawlers in this repository were created as part of a master thesis on GDPR Compliance, 
-and is part of a series of repositories for the CookieBlock browser extension:
+The scripts in this repository were created as part of a master thesis on GDPR Compliance, 
+and is part of a series of repositories for the __CookieBlock__ browser extension:
 
-TODO
+https://github.com/dibollinger/CookieBlock
 
-Thanks go to:
+__Thesis Supervision and Assistance:__
 * Karel Kubicek
 * Dr. Carlos Cotrini
 * Prof. Dr. David Basin
 * The Institute of Information Security at ETH Zürich
+
+__Additional Thanks go to:__
 * Mozilla
 * Consent-O-Matic Authors
 
