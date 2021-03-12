@@ -244,7 +244,7 @@ Debug stats relating to the consent crawl, including details on success or failu
 
 # Credits and License
 
-* Command Line Scripts and Consent Label Scraper Code, Copyright © 2020 Dino Bollinger
+* Command Line Scripts and Consent Label Scraper Code, Copyright © 2021 Dino Bollinger
     - Licensed under the GPLv3
 
 * OpenWPM v0.12.0, Copyright © 2015 Steven Englehardt
