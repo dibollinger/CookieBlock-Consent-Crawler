@@ -211,7 +211,7 @@ def _parse_termly_cookie_json(cookie_dict: Dict, browser_id: int, visit_id: int,
                     # service = cookie["service"] if "service" in cookie else None
                     # service_policy_link = cookie["service_policy_link"] if "service_policy_link" in cookie else None
                     send_cookiedat_to_db(sock, name, domain, cat_id, catname, browser_id,
-                                         visit_id, purpose, expiry, tracker_type, None, None)
+                                         visit_id, purpose, expiry, tracker_type, None)
         except Exception as ex:
             report = f"TERMLY: Unexpected error while extracting Cookies from Termly Dict: : {type(ex)} {ex}"
             return CrawlState.PARSE_ERROR, report

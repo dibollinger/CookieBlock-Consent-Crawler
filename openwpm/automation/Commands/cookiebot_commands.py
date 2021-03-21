@@ -205,7 +205,7 @@ def internal_cookiebot_scrape(url: str, browser_id: int, visit_id: int, sock: cl
 
             for c in cookies:
                 cookie_count += 1
-                send_cookiedat_to_db(sock, c[0], c[1], cat_id, cat_name, browser_id, visit_id, c[2], c[3], c[4], c[5], None)
+                send_cookiedat_to_db(sock, c[0], c[1], cat_id, cat_name, browser_id, visit_id, c[2], c[3], c[4], c[5])
 
     # format of the cookiebot data should be uniform, but in case this happens
     # to be violated, this try-except block catches it
