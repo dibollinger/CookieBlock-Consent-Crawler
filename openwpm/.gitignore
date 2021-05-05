@@ -215,13 +215,13 @@ coverage.xml
 *.pot
 
 # Sphinx documentation
-openwpm/docs/_build/
+docs/_build/
 
 # npm packages
 node_modules
 
 # built extension artifacts
-openwpm/automation/Extension/firefox/dist
-openwpm/automation/Extension/firefox/openwpm.xpi
-openwpm/automation/Extension/firefox/src/content.js
-openwpm/automation/Extension/firefox/src/feature.js
+automation/Extension/firefox/dist
+automation/Extension/firefox/openwpm.xpi
+automation/Extension/firefox/src/content.js
+automation/Extension/firefox/src/feature.js
