@@ -31,6 +31,7 @@ Options:
 from docopt import docopt
 from openwpm.automation import CommandSequence, TaskManager
 from shared_utils import retrieve_cmdline_urls, filter_bad_urls_and_sort
+from pyvirtualdisplay import Display
 
 import sys
 import os
@@ -75,7 +76,7 @@ def setup_browser_config(browser_param: Dict) -> None:
 
     # xvfb does not clean up sessions, causes a small but significant memory
     # leak each time a site is crawled, hence we use headless mode instead
-    browser_param['display_mode'] = "headless"
+    # browser_param['display_mode'] = "headless"
 
     # privacy options (as lax as possible)
     browser_param['donottrack'] = False
@@ -146,6 +147,10 @@ def main():
         manager_params["data_directory"] = "./collected_data/"
         manager_params["database_name"] = f"crawl_data_{now}.sqlite"
 
+    # activate pyvirtualdisplay
+    disp = Display(backend="xvfb")
+    disp.start()
+
     # prevent shutdown due to failures
     manager_params["failure_limit"] = 16384
 
@@ -176,7 +181,7 @@ def main():
         if cargs["all"]:
             # CMP crawl and Browse functions consolidated into the same command
             # this is done such that browse can be aborted early if CMP is not found
-            command_sequence.run_consent_crawl(num_links=20, sleep=1.0, timeout=180,
+            command_sequence.run_consent_crawl(num_links=10, sleep=1.0, timeout=180,
                                                abort_browse_early=True, subpage_timeout=10.0)
         else:
             # legacy variants of the consent crawler commands. Only a single CMP active.
@@ -196,6 +201,7 @@ def main():
 
     # shuts down the browsers and waits for the data to finish logging
     manager.close()
+    disp.stop()
 
     return 0
 
