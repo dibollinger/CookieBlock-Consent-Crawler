@@ -4,8 +4,8 @@ OpenWPM Cookie Consent Crawler
 Copyright (c) 2021  Dino Bollinger, ETH Zürich, Information Security Group
 Licensed under the GPLv3, see included LICENSE file.
 -----------------------------------------
-Uses the OpenWPM framework 0.12.0 to scrape cookie consent category labels from websites on the internet.
-Simultaneously uses browser instrumentation to collect cookie data received through HTTP requests and Javascript calls.
+Uses the OpenWPM framework 0.12.0 to scrape cookie consent category labels from websites.
+Also collects the cookies themselves using OpenWPM instrumentation.
 
 Works best if connecting from within an EU member state, either natively or via VPN.
 
@@ -71,11 +71,10 @@ def setup_browser_config(browser_param: Dict) -> None:
     # since we have a fixed profile, we don't need this
     browser_param['random_attributes'] = False
 
-    # place cursor on random positions, and have random page switch delay
+    # place cursor on random positions, scroll down the page and have random switch delay
     browser_param['bot_mitigation'] = True
 
-    # xvfb does not clean up sessions, causes a small but significant memory
-    # leak each time a site is crawled, hence we use headless mode instead
+    # Disabled. Instead, use pyvirtualdisplay with browser windows. Results in roughly 10% more cookies overall.
     # browser_param['display_mode'] = "headless"
 
     # privacy options (as lax as possible)
@@ -89,8 +88,8 @@ def setup_browser_config(browser_param: Dict) -> None:
     browser_param["tracking-protection"] = False
 
     # automatically accept GDPR consent notices in order to load all cookies
-    # Note: this extension is also included in the profile as a safety measure
-    browser_param["consentomatic"] = True
+    # TODO: broken, however installing it in the profile directly works anyways
+    # browser_param["consentomatic"] = True
 
     # additional browser parameters
     browser_param['prefs'] = {"xpinstall.signatures.required": False,
@@ -112,7 +111,7 @@ def main():
     ## Set of test arguments, uncomment to try the crawler
     # argv = ["cookiebot", "-u", "https://purplemath.com/", "-u", "https://gamefly.com/", "-n", "2"]
     # argv = ["onetrust", "-n", "5", "-u", "https://www.metabomb.net/", "-u", "https://www.maytag.com/", "-u", "https://www.aveda.com/", "-u", "https://www.equipmenttrader.com/", "-u", "https://www.tiffany.com/"]
-    # argv = ["all", "-n", "3", "-u", "https://www.equipmenttrader.com/"]
+    # argv = ["all", "-n", "1", "-u", "https://www.equipmenttrader.com/"]
 
     # parse usage docstring and get arguments
     cargs = docopt(__doc__, argv=argv)
@@ -132,7 +131,9 @@ def main():
 
     # define output directories
     manager_params["output_format"] = "local"
+
     manager_params["log_directory"] = "./logs/"
+    os.makedirs(manager_params["log_directory"], exist_ok=True)
 
     # define log file and database paths
     now = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -146,6 +147,7 @@ def main():
     else:
         manager_params["data_directory"] = "./collected_data/"
         manager_params["database_name"] = f"crawl_data_{now}.sqlite"
+    os.makedirs(manager_params["data_directory"], exist_ok=True)
 
     # activate pyvirtualdisplay
     disp = Display(backend="xvfb")
