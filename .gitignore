@@ -1,8 +1,8 @@
 .idea/
 __pycache__
-logs/
-openwpm/automation/Extension/firefox/dist/
-openwpm/automation/Extension/firefox/node_modules/
-openwpm/automation/Extension/firefox/openwpm.xpi
-openwpm/firefox-bin/
+logs/*.log
+crawler/openwpm/automation/Extension/firefox/dist/
+crawler/openwpm/automation/Extension/firefox/node_modules/
+crawler/openwpm/automation/Extension/firefox/openwpm.xpi
+crawler/openwpm/firefox-bin/
 

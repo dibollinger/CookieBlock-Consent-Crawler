@@ -1,0 +1,259 @@
+2021-05-10 19:26:43,812 - MainProcess[MainThread]- BrowserManager       - INFO    : BROWSER 1: Launching browser...
+2021-05-10 19:26:43,815 - MainProcess[MainThread]- BrowserManager       - DEBUG   : BROWSER 1: Spawn attempt 0 
+2021-05-10 19:26:43,837 - MainProcess[MainThread]- deploy_firefox       - DEBUG   : BROWSER 1: Loading initial browser profile from: ./crawler_profile/
+2021-05-10 19:26:43,844 - MainProcess[MainThread]- profile_commands     - DEBUG   : BROWSER 1: Copying profile tar from ./crawler_profile/profile.tar.gz to /tmp/tmp_r9aa_xi/
+2021-05-10 19:26:44,077 - MainProcess[MainThread]- profile_commands     - DEBUG   : BROWSER 1: Tarfile extracted
+2021-05-10 19:26:44,078 - MainProcess[MainThread]- deploy_firefox       - DEBUG   : BROWSER 1: Saved extension config file to: /tmp/tmp_r9aa_xi/browser_params.json
+2021-05-10 19:26:44,086 - MainProcess[MainThread]- deploy_firefox       - INFO    : BROWSER 1: Setting custom preference: xpinstall.signatures.required = False
+2021-05-10 19:26:44,086 - MainProcess[MainThread]- deploy_firefox       - INFO    : BROWSER 1: Setting custom preference: privacy.resistFingerprinting = False
+2021-05-10 19:26:44,086 - MainProcess[MainThread]- deploy_firefox       - INFO    : BROWSER 1: Setting custom preference: privacy.trackingprotection.pbmode.enabled = False
+2021-05-10 19:26:44,087 - MainProcess[MainThread]- deploy_firefox       - INFO    : BROWSER 1: Setting custom preference: privacy.trackingprotection.enabled = False
+2021-05-10 19:26:44,087 - MainProcess[MainThread]- deploy_firefox       - INFO    : BROWSER 1: Setting custom preference: network.cookie.maxNumber = 10000
+2021-05-10 19:26:44,087 - MainProcess[MainThread]- deploy_firefox       - INFO    : BROWSER 1: Setting custom preference: network.cookie.maxPerHost = 10000
+2021-05-10 19:26:44,088 - MainProcess[MainThread]- deploy_firefox       - INFO    : BROWSER 1: Setting custom preference: network.cookie.quotaPerHost = 10000
+2021-05-10 19:26:44,088 - MainProcess[MainThread]- deploy_firefox       - INFO    : BROWSER 1: Setting custom preference: privacy.socialtracking.block_cookies.enabled = False
+2021-05-10 19:26:44,088 - MainProcess[MainThread]- deploy_firefox       - INFO    : BROWSER 1: Setting custom preference: network.cookie.thirdparty.sessionOnly = False
+2021-05-10 19:26:44,088 - MainProcess[MainThread]- deploy_firefox       - INFO    : BROWSER 1: Setting custom preference: network.cookie.sameSite.laxByDefault = True
+2021-05-10 19:26:44,096 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667604096	geckodriver	INFO	Listening on 127.0.0.1:59475
+2021-05-10 19:26:45,362 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667605361	mozrunner::runner	INFO	Running command: "/home/bdino/Documents/Git/cookieblock_repos/CookieBlock-Consent-Crawler/openwpm/firefox-bin/firefox-bin" "--marionette" "-headless" "--width=1366" "--height=768" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileo4IOwp"
+2021-05-10 19:26:45,384 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: *** You are running in headless mode.
+2021-05-10 19:26:47,144 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667607144	Marionette	INFO	Listening on port 39911
+2021-05-10 19:26:47,170 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667607169	Marionette	WARN	TLS certificate errors will be ignored for this session
+2021-05-10 19:26:47,348 - MainProcess[MainThread]- deploy_firefox       - DEBUG   : BROWSER 1: OpenWPM Firefox extension loaded
+2021-05-10 19:26:47,355 - MainProcess[MainThread]- BrowserManager       - DEBUG   : BROWSER 1: Looking for extension port information in /tmp/rust_mozprofileo4IOwp/
+2021-05-10 19:26:47,357 - MainProcess[Thread-1  ]- FirefoxExtension     - DEBUG   : Cookie instrumentation enabled
+2021-05-10 19:26:47,360 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: console.log: WebExtensions: Wrote to /tmp/rust_mozprofileo4IOwp/extension_port.txt
+2021-05-10 19:26:47,456 - MainProcess[MainThread]- BrowserManager       - DEBUG   : BROWSER 1: Connecting to extension on port 34995
+2021-05-10 19:26:47,458 - MainProcess[MainThread]- BrowserManager       - DEBUG   : BROWSER 1: BrowserManager ready.
+2021-05-10 19:26:47,459 - MainProcess[MainThread]- BrowserManager       - DEBUG   : BROWSER 1: Browser spawn sucessful!
+2021-05-10 19:26:47,562 - MainProcess[MainThread]- TaskManager          - INFO    : 
+
+OpenWPM Version: b'0f664c5'
+Firefox Version: b'80.0'
+
+========== Manager Configuration ==========
+{
+  "aggregator_address": [
+    "127.0.0.1",
+    46779
+  ],
+  "data_directory": "./collected_data/",
+  "database_name": "./collected_data/crawl_data_20210510_192643.sqlite",
+  "failure_limit": 16384,
+  "log_directory": "./logs/",
+  "log_file": "./logs/crawl_20210510_192643.log",
+  "logger_address": [
+    "127.0.0.1",
+    42165
+  ],
+  "num_browsers": 1,
+  "output_format": "local",
+  "s3_bucket": null,
+  "s3_directory": null,
+  "screenshot_path": "./collected_data/screenshots",
+  "source_dump_path": "./collected_data/sources",
+  "testing": false
+}
+
+========== Browser Configuration ==========
+Keys:
+{
+  "browser_id": 0,
+  "adblock-plus": 1,
+  "bot_mitigation": 2,
+  "browser": 3,
+  "callstack_instrument": 4,
+  "consentomatic": 5,
+  "cookie_instrument": 6,
+  "disconnect": 7,
+  "display_mode": 8,
+  "donottrack": 9,
+  "extension_enabled": 10,
+  "ghostery": 11,
+  "http_instrument": 12,
+  "https-everywhere": 13,
+  "js_instrument": 14,
+  "js_instrument_settings": 15,
+  "navigation_instrument": 16,
+  "prefs": 17,
+  "random_attributes": 18,
+  "save_content": 19,
+  "tp_cookies": 20,
+  "tracking-protection": 21,
+  "ublock-origin": 22
+}
+
+  0  1      2     3        4      5     6     7      8         9      10    11     12     13     14     15                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          16     17                                                                                                                                                                                                                                                                                                                                                                                                                                                  18     19     20      21     22
+---  -----  ----  -------  -----  ----  ----  -----  --------  -----  ----  -----  -----  -----  -----  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  -----  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  -----  -----  ------  -----  -----
+  1  False  True  firefox  False  True  True  False  headless  False  True  False  False  False  False  [{"object": window['ScriptProcessorNode'].prototype, "instrumentedName": "ScriptProcessorNode", "logSettings": {"propertiesToInstrument": [], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window['GainNode'].prototype, "instrumentedName": "GainNode", "logSettings": {"propertiesToInstrument": [], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window['AnalyserNode'].prototype, "instrumentedName": "AnalyserNode", "logSettings": {"propertiesToInstrument": [], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window['OscillatorNode'].prototype, "instrumentedName": "OscillatorNode", "logSettings": {"propertiesToInstrument": [], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window['OfflineAudioContext'].prototype, "instrumentedName": "OfflineAudioContext", "logSettings": {"propertiesToInstrument": [], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window['AudioContext'].prototype, "instrumentedName": "AudioContext", "logSettings": {"propertiesToInstrument": [], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window['RTCPeerConnection'].prototype, "instrumentedName": "RTCPeerConnection", "logSettings": {"propertiesToInstrument": [], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window['HTMLCanvasElement'].prototype, "instrumentedName": "HTMLCanvasElement", "logSettings": {"propertiesToInstrument": [], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window['Storage'].prototype, "instrumentedName": "Storage", "logSettings": {"propertiesToInstrument": [], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window.navigator, "instrumentedName": "window.navigator", "logSettings": {"propertiesToInstrument": [], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window['CanvasRenderingContext2D'].prototype, "instrumentedName": "CanvasRenderingContext2D", "logSettings": {"propertiesToInstrument": [], "nonExistingPropertiesToInstrument": [], "excludedProperties": ["quadraticCurveTo", "transform", "closePath", "canvas", "beginPath", "lineTo", "clearRect", "globalAlpha", "drawImage", "moveTo", "setTransform", "translate"], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window, "instrumentedName": "window", "logSettings": {"propertiesToInstrument": ["name", "sessionStorage", "localStorage"], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window.document, "instrumentedName": "window.document", "logSettings": {"propertiesToInstrument": ["cookie", "referrer"], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": true, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}, {"object": window.screen, "instrumentedName": "window.screen", "logSettings": {"propertiesToInstrument": ["colorDepth", "pixelDepth"], "nonExistingPropertiesToInstrument": [], "excludedProperties": [], "logCallStack": false, "logFunctionsAsStrings": false, "logFunctionGets": false, "preventSets": false, "recursive": false, "depth": 5}}]  False  {'xpinstall.signatures.required': False, 'privacy.resistFingerprinting': False, 'privacy.trackingprotection.pbmode.enabled': False, 'privacy.trackingprotection.enabled': False, 'network.cookie.maxNumber': 10000, 'network.cookie.maxPerHost': 10000, 'network.cookie.quotaPerHost': 10000, 'privacy.socialtracking.block_cookies.enabled': False, 'network.cookie.thirdparty.sessionOnly': False, 'network.cookie.sameSite.laxByDefault': True}  False  False  always  False  False
+
+========== Input profile tar files ==========
+{
+  "1": "./crawler_profile/"
+}
+
+========== Output (archive) profile dirs ==========
+  No profile archive directories specified
+
+
+2021-05-10 19:26:48,816 - MainProcess[MainThread]- TaskManager          - DEBUG   : Checking command failure status indicator...
+2021-05-10 19:26:48,813 - MainProcess[MainThread]- BaseAggregator       - DEBUG   : Status update; current record queue size: 0. current number of threads: 5.
+2021-05-10 19:26:48,820 - MainProcess[Thread-8  ]- TaskManager          - INFO    : Starting to work on CommandSequence with visit_id 1 on browser with id 1
+2021-05-10 19:26:48,826 - MainProcess[MainThread]- BrowserManager       - INFO    : BROWSER 1: EXECUTING COMMAND: IntitializeCommand()
+2021-05-10 19:26:48,830 - MainProcess[MainThread]- BrowserManager       - INFO    : BROWSER 1: EXECUTING COMMAND: GenericCMPScrapeCommand(https://www.purplemath.com,10,1.0,True,10.0)
+2021-05-10 19:26:48,858 - MainProcess[Thread-1  ]- FirefoxExtension     - DEBUG   : Setting visit_id the legacy way
+2021-05-10 19:26:50,251 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: JavaScript error: https://www.purplemath.com/, line 53: SyntaxError: missing } after property list
+2021-05-10 19:26:50,251 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: JavaScript note: https://www.purplemath.com/, line 53: { opened at line 53, column 43
+2021-05-10 19:26:50,662 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: extension-storage: migration complete
+2021-05-10 19:26:52,089 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: JavaScript warning: https://pagead2.googlesyndication.com/bg/XEkuV_KLMWD5Al97iCmkDgjGab_rX-gE6bZrQzRSZUo.js line 1 > eval line 3106 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+2021-05-10 19:26:52,090 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: JavaScript warning: https://pagead2.googlesyndication.com/bg/XEkuV_KLMWD5Al97iCmkDgjGab_rX-gE6bZrQzRSZUo.js line 1 > eval line 3106 > eval, line 1: Failed to create WebGL context: WebGL creation failed:
+2021-05-10 19:26:52,091 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: * Can't use WebGL in headless mode (https://bugzil.la/1375585).
+2021-05-10 19:26:52,147 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667612147	Marionette	WARN	TimedPromise timed out after 0 ms: stacktrace:
+2021-05-10 19:26:52,148 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise/<@chrome://marionette/content/sync.js:245:13
+2021-05-10 19:26:52,148 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise@chrome://marionette/content/sync.js:230:10
+2021-05-10 19:26:52,148 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Sleep@chrome://marionette/content/sync.js:283:10
+2021-05-10 19:26:52,149 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatchPause@chrome://marionette/content/action.js:1482:10
+2021-05-10 19:26:52,149 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: toEvents/<@chrome://marionette/content/action.js:1156:16
+2021-05-10 19:26:52,149 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatchTickActions@chrome://marionette/content/action.js:1060:35
+2021-05-10 19:26:52,149 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch/chainEvents<@chrome://marionette/content/action.js:1028:20
+2021-05-10 19:26:52,150 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch@chrome://marionette/content/action.js:1034:5
+2021-05-10 19:26:52,150 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: performActions@chrome://marionette/content/listener.js:856:16
+2021-05-10 19:26:52,150 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/</req<@chrome://marionette/content/listener.js:529:14
+2021-05-10 19:26:52,150 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/<@chrome://marionette/content/listener.js:522:15
+2021-05-10 19:26:52,157 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667612157	Marionette	WARN	TimedPromise timed out after 0 ms: stacktrace:
+2021-05-10 19:26:52,158 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise/<@chrome://marionette/content/sync.js:245:13
+2021-05-10 19:26:52,158 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise@chrome://marionette/content/sync.js:230:10
+2021-05-10 19:26:52,158 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Sleep@chrome://marionette/content/sync.js:283:10
+2021-05-10 19:26:52,158 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatchPause@chrome://marionette/content/action.js:1482:10
+2021-05-10 19:26:52,158 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: toEvents/<@chrome://marionette/content/action.js:1156:16
+2021-05-10 19:26:52,160 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatchTickActions@chrome://marionette/content/action.js:1060:35
+2021-05-10 19:26:52,160 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch/chainEvents<@chrome://marionette/content/action.js:1028:20
+2021-05-10 19:26:52,160 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch@chrome://marionette/content/action.js:1034:5
+2021-05-10 19:26:52,160 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: performActions@chrome://marionette/content/listener.js:856:16
+2021-05-10 19:26:52,160 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/</req<@chrome://marionette/content/listener.js:529:14
+2021-05-10 19:26:52,161 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/<@chrome://marionette/content/listener.js:522:15
+2021-05-10 19:26:52,165 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667612164	Marionette	WARN	TimedPromise timed out after 0 ms: stacktrace:
+2021-05-10 19:26:52,165 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise/<@chrome://marionette/content/sync.js:245:13
+2021-05-10 19:26:52,165 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise@chrome://marionette/content/sync.js:230:10
+2021-05-10 19:26:52,165 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Sleep@chrome://marionette/content/sync.js:283:10
+2021-05-10 19:26:52,166 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatchPause@chrome://marionette/content/action.js:1482:10
+2021-05-10 19:26:52,166 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: toEvents/<@chrome://marionette/content/action.js:1156:16
+2021-05-10 19:26:52,166 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatchTickActions@chrome://marionette/content/action.js:1060:35
+2021-05-10 19:26:52,166 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch/chainEvents<@chrome://marionette/content/action.js:1028:20
+2021-05-10 19:26:52,167 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch@chrome://marionette/content/action.js:1034:5
+2021-05-10 19:26:52,168 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: performActions@chrome://marionette/content/listener.js:856:16
+2021-05-10 19:26:52,168 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/</req<@chrome://marionette/content/listener.js:529:14
+2021-05-10 19:26:52,168 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/<@chrome://marionette/content/listener.js:522:15
+2021-05-10 19:26:52,177 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667612177	Marionette	WARN	TimedPromise timed out after 0 ms: stacktrace:
+2021-05-10 19:26:52,178 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise/<@chrome://marionette/content/sync.js:245:13
+2021-05-10 19:26:52,178 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise@chrome://marionette/content/sync.js:230:10
+2021-05-10 19:26:52,178 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Sleep@chrome://marionette/content/sync.js:283:10
+2021-05-10 19:26:52,178 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatchPause@chrome://marionette/content/action.js:1482:10
+2021-05-10 19:26:52,179 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: toEvents/<@chrome://marionette/content/action.js:1156:16
+2021-05-10 19:26:52,179 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatchTickActions@chrome://marionette/content/action.js:1060:35
+2021-05-10 19:26:52,179 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch/chainEvents<@chrome://marionette/content/action.js:1028:20
+2021-05-10 19:26:52,179 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch@chrome://marionette/content/action.js:1034:5
+2021-05-10 19:26:52,179 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: performActions@chrome://marionette/content/listener.js:856:16
+2021-05-10 19:26:52,180 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/</req<@chrome://marionette/content/listener.js:529:14
+2021-05-10 19:26:52,180 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/<@chrome://marionette/content/listener.js:522:15
+2021-05-10 19:26:52,183 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667612183	Marionette	WARN	TimedPromise timed out after 0 ms: stacktrace:
+2021-05-10 19:26:52,184 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise/<@chrome://marionette/content/sync.js:245:13
+2021-05-10 19:26:52,184 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise@chrome://marionette/content/sync.js:230:10
+2021-05-10 19:26:52,185 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Sleep@chrome://marionette/content/sync.js:283:10
+2021-05-10 19:26:52,185 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatchPause@chrome://marionette/content/action.js:1482:10
+2021-05-10 19:26:52,185 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: toEvents/<@chrome://marionette/content/action.js:1156:16
+2021-05-10 19:26:52,186 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatchTickActions@chrome://marionette/content/action.js:1060:35
+2021-05-10 19:26:52,186 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch/chainEvents<@chrome://marionette/content/action.js:1028:20
+2021-05-10 19:26:52,186 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch@chrome://marionette/content/action.js:1034:5
+2021-05-10 19:26:52,186 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: performActions@chrome://marionette/content/listener.js:856:16
+2021-05-10 19:26:52,187 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/</req<@chrome://marionette/content/listener.js:529:14
+2021-05-10 19:26:52,187 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/<@chrome://marionette/content/listener.js:522:15
+2021-05-10 19:26:52,189 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667612189	Marionette	WARN	TimedPromise timed out after 0 ms: stacktrace:
+2021-05-10 19:26:52,190 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise/<@chrome://marionette/content/sync.js:245:13
+2021-05-10 19:26:52,190 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise@chrome://marionette/content/sync.js:230:10
+2021-05-10 19:26:52,190 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Sleep@chrome://marionette/content/sync.js:283:10
+2021-05-10 19:26:52,190 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatchPause@chrome://marionette/content/action.js:1482:10
+2021-05-10 19:26:52,191 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: toEvents/<@chrome://marionette/content/action.js:1156:16
+2021-05-10 19:26:52,192 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatchTickActions@chrome://marionette/content/action.js:1060:35
+2021-05-10 19:26:52,192 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch/chainEvents<@chrome://marionette/content/action.js:1028:20
+2021-05-10 19:26:52,192 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch@chrome://marionette/content/action.js:1034:5
+2021-05-10 19:26:52,192 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: performActions@chrome://marionette/content/listener.js:856:16
+2021-05-10 19:26:52,192 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/</req<@chrome://marionette/content/listener.js:529:14
+2021-05-10 19:26:52,193 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/<@chrome://marionette/content/listener.js:522:15
+2021-05-10 19:26:52,196 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667612196	Marionette	WARN	TimedPromise timed out after 0 ms: stacktrace:
+2021-05-10 19:26:52,196 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise/<@chrome://marionette/content/sync.js:245:13
+2021-05-10 19:26:52,197 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise@chrome://marionette/content/sync.js:230:10
+2021-05-10 19:26:52,197 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Sleep@chrome://marionette/content/sync.js:283:10
+2021-05-10 19:26:52,198 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatchPause@chrome://marionette/content/action.js:1482:10
+2021-05-10 19:26:52,198 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: toEvents/<@chrome://marionette/content/action.js:1156:16
+2021-05-10 19:26:52,198 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatchTickActions@chrome://marionette/content/action.js:1060:35
+2021-05-10 19:26:52,198 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch/chainEvents<@chrome://marionette/content/action.js:1028:20
+2021-05-10 19:26:52,199 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch@chrome://marionette/content/action.js:1034:5
+2021-05-10 19:26:52,199 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: performActions@chrome://marionette/content/listener.js:856:16
+2021-05-10 19:26:52,199 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/</req<@chrome://marionette/content/listener.js:529:14
+2021-05-10 19:26:52,200 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/<@chrome://marionette/content/listener.js:522:15
+2021-05-10 19:26:52,206 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667612206	Marionette	WARN	TimedPromise timed out after 0 ms: stacktrace:
+2021-05-10 19:26:52,206 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise/<@chrome://marionette/content/sync.js:245:13
+2021-05-10 19:26:52,207 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise@chrome://marionette/content/sync.js:230:10
+2021-05-10 19:26:52,207 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Sleep@chrome://marionette/content/sync.js:283:10
+2021-05-10 19:26:52,207 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatchPause@chrome://marionette/content/action.js:1482:10
+2021-05-10 19:26:52,207 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: toEvents/<@chrome://marionette/content/action.js:1156:16
+2021-05-10 19:26:52,208 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatchTickActions@chrome://marionette/content/action.js:1060:35
+2021-05-10 19:26:52,208 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch/chainEvents<@chrome://marionette/content/action.js:1028:20
+2021-05-10 19:26:52,208 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch@chrome://marionette/content/action.js:1034:5
+2021-05-10 19:26:52,208 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: performActions@chrome://marionette/content/listener.js:856:16
+2021-05-10 19:26:52,209 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/</req<@chrome://marionette/content/listener.js:529:14
+2021-05-10 19:26:52,209 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/<@chrome://marionette/content/listener.js:522:15
+2021-05-10 19:26:52,212 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667612211	Marionette	WARN	TimedPromise timed out after 0 ms: stacktrace:
+2021-05-10 19:26:52,212 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise/<@chrome://marionette/content/sync.js:245:13
+2021-05-10 19:26:52,212 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise@chrome://marionette/content/sync.js:230:10
+2021-05-10 19:26:52,212 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Sleep@chrome://marionette/content/sync.js:283:10
+2021-05-10 19:26:52,213 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatchPause@chrome://marionette/content/action.js:1482:10
+2021-05-10 19:26:52,213 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: toEvents/<@chrome://marionette/content/action.js:1156:16
+2021-05-10 19:26:52,213 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatchTickActions@chrome://marionette/content/action.js:1060:35
+2021-05-10 19:26:52,213 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch/chainEvents<@chrome://marionette/content/action.js:1028:20
+2021-05-10 19:26:52,214 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch@chrome://marionette/content/action.js:1034:5
+2021-05-10 19:26:52,214 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: performActions@chrome://marionette/content/listener.js:856:16
+2021-05-10 19:26:52,214 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/</req<@chrome://marionette/content/listener.js:529:14
+2021-05-10 19:26:52,214 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/<@chrome://marionette/content/listener.js:522:15
+2021-05-10 19:26:52,214 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667612214	Marionette	WARN	TimedPromise timed out after 0 ms: stacktrace:
+2021-05-10 19:26:52,215 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise/<@chrome://marionette/content/sync.js:245:13
+2021-05-10 19:26:52,215 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: TimedPromise@chrome://marionette/content/sync.js:230:10
+2021-05-10 19:26:52,215 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Sleep@chrome://marionette/content/sync.js:283:10
+2021-05-10 19:26:52,216 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatchPause@chrome://marionette/content/action.js:1482:10
+2021-05-10 19:26:52,216 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: toEvents/<@chrome://marionette/content/action.js:1156:16
+2021-05-10 19:26:52,216 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatchTickActions@chrome://marionette/content/action.js:1060:35
+2021-05-10 19:26:52,216 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch/chainEvents<@chrome://marionette/content/action.js:1028:20
+2021-05-10 19:26:52,217 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: action.dispatch@chrome://marionette/content/action.js:1034:5
+2021-05-10 19:26:52,217 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: performActions@chrome://marionette/content/listener.js:856:16
+2021-05-10 19:26:52,217 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/</req<@chrome://marionette/content/listener.js:529:14
+2021-05-10 19:26:52,217 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: dispatch/<@chrome://marionette/content/listener.js:522:15
+2021-05-10 19:26:53,386 - MainProcess[MainThread]- consent_commons      - INFO    : BROWSER 1: CONSENTCRAWLER: COOKIEBOT: Found Cookiebot ID using Variant 1
+2021-05-10 19:26:53,387 - MainProcess[MainThread]- consent_commons      - INFO    : BROWSER 1: CONSENTCRAWLER: COOKIEBOT: Cookiebot UUID = 57947215-bf68-4a54-a017-454edced5413
+2021-05-10 19:26:53,395 - MainProcess[MainThread]- consent_commons      - INFO    : BROWSER 1: CONSENTCRAWLER: COOKIEBOT: Found referer: www.purplemath.com
+2021-05-10 19:26:53,577 - MainProcess[MainThread]- consent_commons      - ERROR   : BROWSER 1: CONSENTCRAWLER: COOKIEBOT: Received an out-of-region response from "https://consent.cookiebot.com/57947215-bf68-4a54-a017-454edced5413/cc.js?referer=www.purplemath.com"
+2021-05-10 19:26:53,579 - MainProcess[MainThread]- consent_commons      - DEBUG   : BROWSER 1: CONSENTCRAWLER: CMP_ELAPSED_TIME 4.748
+2021-05-10 19:26:53,580 - MainProcess[MainThread]- consent_commons      - INFO    : BROWSER 1: CONSENTCRAWLER: Aborting browse phase as CMP crawl failed.
+2021-05-10 19:26:53,584 - MainProcess[MainThread]- BrowserManager       - INFO    : BROWSER 1: EXECUTING COMMAND: FinalizeCommand(5)
+2021-05-10 19:26:53,835 - MainProcess[MainThread]- BaseAggregator       - DEBUG   : Status update; current record queue size: 2. current number of threads: 5.
+2021-05-10 19:26:57,199 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: JavaScript error: resource://gre/modules/TelemetryUtils.jsm, line 159: TypeError: date is undefined
+2021-05-10 19:26:58,853 - MainProcess[Thread-8  ]- TaskManager          - INFO    : Finished working on CommandSequence with visit_id 1 on browser with id 1
+2021-05-10 19:26:58,858 - MainProcess[MainThread]- BaseAggregator       - DEBUG   : Status update; current record queue size: 2. current number of threads: 5.
+2021-05-10 19:26:59,578 - MainProcess[OpenWPM-completion_handler]- TaskManager          - DEBUG   : Invoking callback of visit_id 1
+2021-05-10 19:26:59,580 - MainProcess[OpenWPM-completion_handler]- run_consent_crawl    - INFO    : Command sequence completed.
+2021-05-10 19:26:59,581 - MainProcess[OpenWPM-completion_handler]- run_consent_crawl    - INFO    : 1/1 completed, 0/1 interrupted
+2021-05-10 19:27:00,855 - MainProcess[MainThread]- BrowserManager       - DEBUG   : BROWSER 1: Closing browser manager...
+2021-05-10 19:27:00,856 - MainProcess[MainThread]- BrowserManager       - DEBUG   : BROWSER 1: Closing browser...
+2021-05-10 19:27:00,857 - MainProcess[MainThread]- BrowserManager       - DEBUG   : BROWSER 1: Joining command thread
+2021-05-10 19:27:00,858 - MainProcess[MainThread]- BrowserManager       - DEBUG   : BROWSER 1: 0.000021 seconds to join command thread
+2021-05-10 19:27:00,868 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 1620667620867	Marionette	INFO	Stopped listening on port 39911
+2021-05-10 19:27:00,958 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: console.error: WebExtensions:
+2021-05-10 19:27:00,959 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Message: [Exception... "Component returned failure code: 0x804b0010 (NS_ERROR_OFFLINE) [nsIInputStream.available]"  nsresult: "0x804b0010 (NS_ERROR_OFFLINE)"  location: "JS frame :: jar:file:///home/bdino/Documents/Git/cookieblock_repos/CookieBlock-Consent-Crawler/openwpm/automation/Extension/firefox/openwpm.xpi!/privileged/sockets/api.js :: onInputStreamReady :: line 51"  data: no]
+2021-05-10 19:27:00,959 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: Stack:
+2021-05-10 19:27:00,959 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: onInputStreamReady@jar:file:///home/bdino/Documents/Git/cookieblock_repos/CookieBlock-Consent-Crawler/openwpm/automation/Extension/firefox/openwpm.xpi!/privileged/sockets/api.js:51:33
+2021-05-10 19:27:00,960 - MainProcess[log-interceptor-1]- selenium_firefox     - DEBUG   : BROWSER 1: driver: 
+2021-05-10 19:27:01,380 - MainProcess[MainThread]- BrowserManager       - DEBUG   : BROWSER 1: Browser manager closed successfully.
+2021-05-10 19:27:01,381 - MainProcess[MainThread]- BaseAggregator       - DEBUG   : Sending the shutdown signal to the LocalAggregator listener process...
+2021-05-10 19:27:01,877 - MainProcess[MainThread]- BaseAggregator       - INFO    : Received shutdown signal!
+2021-05-10 19:27:04,882 - MainProcess[MainThread]- BaseAggregator       - INFO    : Queue was flushed completely
+2021-05-10 19:27:04,891 - MainProcess[MainThread]- BaseAggregator       - DEBUG   : LocalAggregator took 3.509371757507324 seconds to close.
