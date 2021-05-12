@@ -1,0 +1,5 @@
+logs/crawl*.log
+openwpm/automation/Extension/firefox/dist/
+openwpm/automation/Extension/firefox/node_modules/
+openwpm/automation/Extension/firefox/openwpm.xpi
+openwpm/firefox-bin/
