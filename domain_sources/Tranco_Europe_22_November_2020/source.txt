@@ -1,0 +1,4 @@
+Tranco list created on 22 November 2020. Available at: https://tranco-list.eu/list/WNJ9
+
+
+Note: `tranco_WNJ9_without_overlap.txt` contains all domains that do not appear in the Worldwide list from 20 November.
