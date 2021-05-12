@@ -119,6 +119,7 @@ def run_generic_scrape(url: str, sleep: float, visit_id: int, browser_id: int, n
         get_website(url, sleep, visit_id, webdriver, browser_params, extension_socket)
         wait_until_loaded(webdriver, 5)
 
+        state = None
         cmp_type = CrawlerType.FAILED
         try:
             no_cmp: bool = True
@@ -127,6 +128,7 @@ def run_generic_scrape(url: str, sleep: float, visit_id: int, browser_id: int, n
                 cmp_type = next(c_iter)
                 check_call = presence_check_methods[cmp_type]
                 no_cmp = not check_call(webdriver)
+            state = CrawlState.SUCCESS
         except StopIteration:
             cmp_type = CrawlerType.FAILED
             state = CrawlState.CMP_NOT_FOUND
@@ -136,13 +138,13 @@ def run_generic_scrape(url: str, sleep: float, visit_id: int, browser_id: int, n
             elapsed = time.time() - start
             c_logmsg(f"NF_ELAPSED_TIME {elapsed:.3f}", browser_id, logging.DEBUG)
             send_crawlstate_to_db(sock, browser_id, visit_id, state, msg, cmp_type)
-            return
 
-        # perform CMP call
-        scrape_call = crawl_methods[cmp_type]
-        state, msg = scrape_call(url, browser_id, visit_id, sock, webdriver)
+        if state == CrawlState.SUCCESS:
+            # perform CMP call
+            scrape_call = crawl_methods[cmp_type]
+            state, msg = scrape_call(url, browser_id, visit_id, sock, webdriver)
 
-        send_crawlstate_to_db(sock, browser_id, visit_id, state, msg, cmp_type)
+            send_crawlstate_to_db(sock, browser_id, visit_id, state, msg, cmp_type)
     finally:
         sock.close()
 
