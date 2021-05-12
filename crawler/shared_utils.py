@@ -1,6 +1,20 @@
-# Copyright: Dino Bollinger
-# LICENSE: GPLv3
-""" Contains functions shared between main scripts """
+"""
+Shared functions for Consent and Presence crawler
+Copyright (c) 2021  Dino Bollinger, ETH Zürich, Information Security Group
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+"""
 
 import os
 import sys
@@ -62,7 +76,7 @@ def retrieve_cmdline_urls(cargs: Dict) -> Set[str]:
 
 def filter_bad_urls_and_sort(sites: Set[str]) -> List[str]:
     """
-    Filters out bad urls and comments and sorts the result.
+    Filters out bad urls and comments, sorts the result.
     @param sites: urls to filter
     @return: sorted urls
     """

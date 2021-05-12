@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-# Author: Dino Bollinger
-# LICENSE: GPLv3
 """
-OpenWPM-based Cookie-Consent Category Scraper
+OpenWPM Cookie Consent Crawler
+Copyright (c) 2021  Dino Bollinger, ETH Zürich, Information Security Group
+Licensed under the GPLv3, see included LICENSE file.
 -----------------------------------------
 Uses the OpenWPM framework 0.12.0 to scrape cookie consent category labels from websites on the internet.
 Simultaneously uses browser instrumentation to collect cookie data received through HTTP requests and Javascript calls.

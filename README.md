@@ -1,4 +1,4 @@
-# Cookie Consent Webcrawler for CookieBlock
+# Cookie Consent Webcrawler and Related Scripts
 
 This repository contains the two crawlers used to extract category labels for cookies from different
 consent notices, hosted by so-called consent management platforms. These consent notices are required
