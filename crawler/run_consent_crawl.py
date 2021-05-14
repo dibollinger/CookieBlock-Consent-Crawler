@@ -65,7 +65,7 @@ def setup_browser_config(browser_param: Dict) -> None:
     # tar file must be named "profile.tar.gz"
     ## Firefox profile dated 24. November 2020. May need to be replaced in the future.
     ## Comes with Consent-O-Matic preinstalled and preconfigured.
-    browser_param['profile_tar'] = "./crawler_profile/"
+    browser_param['profile_tar'] = "./crawler_profile_consentomatic_accept_all/"
 
     # randomizes screen resolution and user agent string, only if browser profile not already set
     # since we have a fixed profile, we don't need this
