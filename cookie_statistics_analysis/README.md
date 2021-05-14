@@ -1,14 +1,14 @@
 
 # Cookie Statistics Analysis
-This subfolder contains scripts that serve to extract cookie statistics from a cookie data JSON.
+This subfolder contains scripts to extract cookie statistics from a cookie data JSON.
 It also contains scripts to query the Cookiepedia repository and thus retrieve the evaluation for the baseline.
 
 The input data must be provided in the form of JSON, as extracted by `database_scripts/extract_cookie_data.py`.
 
 ## Folder Contents
 
-* `example_input`: Contains a small example JSON computed from a crawl of ~600 websites, 200 for each supported CMP.
-* `stats_out`: Target folder for all statistics scripts.
+* `example_input/`: Contains a small example JSON computed from a crawl of ~600 websites, 200 for each supported CMP.
+* `stats_out/`: Target folder for all statistics scripts.
 * `content_encoding_statistics.py`: Verifies whether certain features can be found in the given cookie data JSON. 
    This involves JSON and CSV separated data, as well as base64 and URL encoding.
 * `cookie_stats.py`: Generally a script used to check how often a cookie name and domain appears, compute majority deviation and lower-bounds noise analysis, and similar stats.
