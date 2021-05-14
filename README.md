@@ -20,7 +20,7 @@ To classify cookies, CookieBlock uses a gradient-boosted tree classifier. To tra
 classifier, it is necessary to retrieve a ground truth of category labels for the training 
 samples. This is the main purpose of this repository.
 
-## Repository Contents:
+## Repository Contents
 
 In the subfolder `crawler` the __presence crawler__ and __consent crawler__ can be found. 
 The former is a fast detection script written in Python, which detects whether a website
@@ -80,9 +80,9 @@ __Thesis Supervision and Assistance:__
 See also the following repositories for other components that were developed as part of the thesis:
 
 * [CookieBlock Browser Extension](https://github.com/dibollinger/CookieBlock)
-* [OpenWPM-based Consent Crawler](https://github.com/dibollinger/CookieBlock-Consent-Crawler)
 * [Cookie Classifier](https://github.com/dibollinger/CookieBlock-Consent-Classifier)
 * [Violation Detection](https://github.com/dibollinger/CookieBlock-Other-Scripts)
+* [Prototype Consent Crawler](https://github.com/dibollinger/CookieBlock-Crawler-Prototype)
 * [Collected Data](https://drive.google.com/drive/folders/1P2ikGlnb3Kbb-FhxrGYUPvGpvHeHy5ao)
 
 ---
