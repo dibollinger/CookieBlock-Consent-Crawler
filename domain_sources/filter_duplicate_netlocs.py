@@ -1,5 +1,5 @@
-# Author: Dino Bollinger
-# LICENSE: MIT
+# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Released under the MIT License
 """
 Takes as input a list of text files containing one valid URL per line,
 and attempts to prune duplicates netlocators (i.e. duplicate domains).

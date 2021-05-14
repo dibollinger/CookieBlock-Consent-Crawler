@@ -1,5 +1,5 @@
-# Author: Dino Bollinger
-# LICENSE: MIT
+# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Released under the MIT License
 """
 Utilizes Cookiepedia's database to find potential domains that make use of the Cookiebot
 and OneTrust CMPs. We do this by crawling the domains which Cookiepedia lists as having

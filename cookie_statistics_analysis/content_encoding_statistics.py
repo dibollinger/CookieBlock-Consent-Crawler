@@ -1,5 +1,5 @@
-# Author: Dino Bollinger
-# License: MIT
+# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Released under the MIT License
 """
 Extract statistics about the usage of JSON, javascript objects, base64 and CSV separation,
 as well as the use of UTF-8 characters in the content of cookie updates.

@@ -1,5 +1,5 @@
-# Author: Dino Bollinger
-# License: MIT
+# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Released under the MIT License
 """
 Uses cookiepedia to query for cookie labels, compares it to the labels collected from the CMP.
 Computers confusion matrix and precision/recall.

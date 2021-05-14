@@ -1,5 +1,5 @@
-# Author: Dino Bollinger
-# LICENSE: MIT
+# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Released under the MIT License
 """
 This script takes as input a json file as produced by the script `database_scripts/extract_cookies_from_db.py`,
 which is a list of cookies with matching consent label declaration.

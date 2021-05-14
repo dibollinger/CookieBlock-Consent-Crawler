@@ -1,5 +1,5 @@
-#Author: Dino Bollinger
-# LICENSE: MIT
+# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Released under the MIT License
 """
 Very simple utility script to generate the difference between two tranco domain lists.
 

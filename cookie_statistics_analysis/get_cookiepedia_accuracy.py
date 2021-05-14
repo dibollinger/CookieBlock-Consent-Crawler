@@ -1,5 +1,5 @@
-#Author: Dino Bollinger
-# License: MIT
+# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Released under the MIT License
 """
 Takes as input an analysis file produced by cookie_stats.py in mode 6/7 and computes Cookiepedia's overall accuracy based on it.
 """
