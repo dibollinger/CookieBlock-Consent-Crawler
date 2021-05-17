@@ -238,9 +238,12 @@ def main() -> int:
                     domains_match: bool = False
                     for domain_entry in consent_domains:
                         canon_cdom = canonical_domain(domain_entry)
-                        if re.search(canon_cdom, canon_adom, re.IGNORECASE):
-                            domains_match = True
-                            break
+                        try:
+                            if re.search(re.escape(canon_cdom), canon_adom, re.IGNORECASE):
+                                domains_match = True
+                                break
+                        except:
+                            logger.error(f"Regex error with the following domain: {canon_cdom}")
 
                     if not domains_match:
                         logger.debug(f"Consent domain: '{row['consent_domain']}' does not match actual: '{row['cookie_domain']}'")
