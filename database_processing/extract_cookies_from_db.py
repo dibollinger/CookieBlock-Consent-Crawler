@@ -167,7 +167,7 @@ def main() -> int:
     @return: exit code, 0 for success
     """
     argv = None
-    argv = ["./example_db/example_crawl_20210213_153228.sqlite"]
+    #argv = ["./example_db/example_crawl_20210213_153228.sqlite"]
     cargs = docopt(__doc__, argv=argv)
 
     setupLogger()
