@@ -1,3 +1,5 @@
+# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Released under the MIT License
 """
 This is a script that takes the database of crawled websites (with the OpenWPM Consent Crawler),
 the ranking of Tranco domains, and then computes a histogram of how many websites contain a CMP
@@ -22,12 +24,12 @@ import matplotlib.pyplot as plt
 
 logger = logging.getLogger("main")
 cmp_types = [0, 1, 2]
-binrange_tiny = [*range(10, 110, 10)]
-binrange_small = [*range(100, 1100, 100)]
-binrange_medium = [*range(1000, 11000, 1000)]
-binrange_large = [*range(10000, 110000, 10000)]
-binrange_huge = [*range(10000, 1010000, 10000)]
-binrange_all = [*range(100000, 6100000, 100000)]
+binrange_tiny = [*range(0, 110, 10)]
+binrange_small = [*range(0, 1100, 100)]
+binrange_medium = [*range(0, 11000, 1000)]
+binrange_large = [*range(0, 110000, 10000)]
+binrange_huge = [*range(0, 1010000, 10000)]
+binrange_all = [*range(0, 6100000, 100000)]
 
 
 def cmp_query(i):
