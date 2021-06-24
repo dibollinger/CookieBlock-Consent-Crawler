@@ -225,13 +225,13 @@ def extract_content_statistics(conn: sqlite3.Connection, stats_path: str) -> Non
             unique_consent_cookies: int = int(cur.fetchone()["count"])
 
             crcounts: List[int]= []
-            for i in range(-1, 4):
-                cur.execute(f'SELECT COUNT(visit_id) AS count FROM consent_data WHERE cat_id == {i};')
+            for i in range(-1, 6):
+                cur.execute(f'SELECT COUNT(visit_id) AS count FROM (SELECT DISTINCT visit_id, name, domain, cat_id, cat_name, purpose, expiry, type_name, type_id FROM consent_data WHERE cat_id == {i});')
                 crcounts.append(int(cur.fetchone()["count"]))
 
-            # Social Media Count
-            cur.execute(f'SELECT COUNT(visit_id) AS count FROM consent_data WHERE cat_id == 5;')
-            crcounts.append(int(cur.fetchone()["count"]))
+            # Social Media Count (old)
+            # cur.execute(f'SELECT COUNT(visit_id) AS count FROM consent_data WHERE cat_id == 99;')
+            # crcounts.append(int(cur.fetchone()["count"]))
 
             # Training data stats
             cur.execute('SELECT COUNT("True") AS count FROM view_training_data;')
@@ -244,13 +244,13 @@ def extract_content_statistics(conn: sqlite3.Connection, stats_path: str) -> Non
             unique_training_cookies: int = int(cur.fetchone()["count"])
 
             tr_cat_counts: List[int]= []
-            for i in range(-1, 4):
+            for i in range(-1, 6):
                 cur.execute(f'SELECT COUNT("True") AS count FROM (SELECT DISTINCT visit_id, name, actual_domain, path, cat_id FROM view_training_data) as tr WHERE tr.cat_id == {i};')
                 tr_cat_counts.append(int(cur.fetchone()["count"]))
 
             # Social media count
-            cur.execute(f'SELECT COUNT("True") AS count FROM (SELECT DISTINCT visit_id, name, actual_domain, path, cat_id FROM view_training_data) as tr WHERE tr.cat_id == 5;')
-            tr_cat_counts.append(int(cur.fetchone()["count"]))
+            # cur.execute(f'SELECT COUNT("True") AS count FROM (SELECT DISTINCT visit_id, name, actual_domain, path, cat_id FROM view_training_data) as tr WHERE tr.cat_id == 99;')
+            # tr_cat_counts.append(int(cur.fetchone()["count"]))
 
             cur.execute("SELECT AVG(num_diffs) as avg_diffs FROM view_num_updates_per_cookie;")
             avg_num_diffs = int(cur.fetchone()["avg_diffs"])
@@ -275,7 +275,8 @@ def extract_content_statistics(conn: sqlite3.Connection, stats_path: str) -> Non
                 fd.write(f"Functional Count:    {crcounts[2]}\n")
                 fd.write(f"Analytical Count:    {crcounts[3]}\n")
                 fd.write(f"Advertising Count:   {crcounts[4]}\n")
-                fd.write(f"Social Media Count:  {crcounts[5]}\n")
+                fd.write(f"Unclassified Count:  {crcounts[5]}\n")
+                fd.write(f"Social Media Count:  {crcounts[6]}\n")
 
                 fd.write("\n## Training Data Statistics\n")
 
@@ -290,7 +291,8 @@ def extract_content_statistics(conn: sqlite3.Connection, stats_path: str) -> Non
                 fd.write(f"Functional Count:    {tr_cat_counts[2]}\n")
                 fd.write(f"Analytical Count:    {tr_cat_counts[3]}\n")
                 fd.write(f"Advertising Count:   {tr_cat_counts[4]}\n")
-                fd.write(f"Social Media Count:  {tr_cat_counts[5]}\n")
+                fd.write(f"Unclassified Count:  {tr_cat_counts[5]}\n")
+                fd.write(f"Social Media Count:  {tr_cat_counts[6]}\n")
 
                 fd.write(f"Average Cookie Updates: {avg_num_diffs}\n")
                 fd.write(f"Max Cookie Updates:     {max_num_diffs}\n")

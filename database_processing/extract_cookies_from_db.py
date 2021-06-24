@@ -122,6 +122,7 @@ WHERE j.record_type <> "deleted"
 ORDER BY j.visit_id, j.name, time_stamp ASC;
 """
 
+consentcookie_names = re.compile("OptanonConsent|OptanonAlertBoxClosed|CookieConsent")
 
 ###
 ### END SQL COMMANDS
@@ -207,6 +208,7 @@ def main() -> int:
     counts_per_cookie_update = [0, 0, 0, 0]
     mismatch_count = 0
     update_count = 0
+    consentcookie_count = 0
     # counts the number of times a data entry was rejected due to blacklist
     blacklisted_encounters = 0
     try:
@@ -261,6 +263,7 @@ def main() -> int:
 
                 try:
                     if json_cookie_key not in json_training_data:
+
                         json_training_data[json_cookie_key] = {
                             "visit_id": row["visit_id"],
                             "name": row["name"],
@@ -271,6 +274,10 @@ def main() -> int:
                             "cmp_origin": row["cmp_type"],
                             "variable_data": []
                         }
+
+                        if consentcookie_names.match(row["name"]):
+                            consentcookie_count += 1
+
                         counts_per_unique_cookie[cat_id] += 1
                         updates_per_cookie_entry[(json_cookie_key, cat_id)] = 1
                     else:
@@ -319,6 +326,7 @@ def main() -> int:
         logger.info(f"Unique training data entries in dictionary: {len(json_training_data)}")
         logger.info(f"Number of unique cookies blacklisted due to inconsistencies {len(blacklist)}")
         logger.info(f"Number of training data updates rejected due to blacklist: {blacklisted_encounters}")
+        logger.info(f"Number of CMP specific consent cookies: {consentcookie_count}")
         logger.info(counts_per_unique_cookie)
         logger.info(counts_per_cookie_update)
 
