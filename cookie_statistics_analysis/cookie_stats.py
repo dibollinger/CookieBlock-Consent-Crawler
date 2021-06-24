@@ -39,6 +39,7 @@ from docopt import docopt
 import requests
 import requests.exceptions as rexcepts
 
+import pickle
 import os
 import json
 import random
@@ -58,12 +59,15 @@ upper_n = 100
 lower_n = 10
 
 # Number of entries to extract, for modes 0, 2, 6, 7
-top_n: int = 1000
+top_n: int = -1 #1000
 random_n: int = 1000
 
 # Minimum number of required domains for inclusion, for modes 3 and 5
 domain_lower_bound = 100
 name_lower_bound = 100
+
+# Lookup dictionary for cookiepedia names
+cookiepedia_lookup = dict()
 
 class CookieCategories(IntEnum):
     Unrecognized = -1
@@ -120,6 +124,9 @@ def get_cookiepedia_opinion(cookie_name: str) -> Tuple[CookieCategories, str]:
     @param cookie_name: Cookie name to retrieve category for.
     @return: Tuple of Category ID and Category Name
     """
+    if cookie_name in cookiepedia_lookup:
+        return cookiepedia_lookup[cookie_name]
+
     result = simple_get(f"https://cookiepedia.co.uk/cookies/{cookie_name}")
 
     cookiepedia_category: str = "Not Found"
@@ -145,6 +152,8 @@ def get_cookiepedia_opinion(cookie_name: str) -> Tuple[CookieCategories, str]:
     else:
         logger.warning(f"Unrecognized category name: {cookiepedia_category}")
         cp_id = CookieCategories.Unrecognized
+
+    cookiepedia_lookup[cookie_name] = (cp_id, cookiepedia_category)
 
     return cp_id, cookiepedia_category
 
@@ -264,6 +273,7 @@ def main() -> int:
     domain_dict: Dict[Tuple, List]
     name_dict, domain_dict = get_category_counts(cargs, training_data)
 
+
     if cargs["<mode>"] == "0":
         logger.info("Getting the average deviation from the majorities overall")
         max_total: int = 0
@@ -324,6 +334,8 @@ def main() -> int:
             for k, cat_counts in most_common[:top_n]:
                 line = construct_output_line(k, cat_counts)
                 fd.write(line)
+        with open("cookiepedia_lookup.pkl", 'wb') as fd:
+            pickle.dump(cookiepedia_lookup, fd)
 
     elif cargs["<mode>"] == "7":
         logger.info("Get an analysis of random cookies...")
