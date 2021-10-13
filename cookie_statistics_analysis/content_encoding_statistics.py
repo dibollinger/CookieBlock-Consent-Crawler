@@ -91,7 +91,7 @@ def main() -> int:
     global ctr_not_base64_encoded, ctr_base64_encoded_strings, ctr_potential_base64_encoded_binary
 
     argv = None
-    argv = ["../training_data/tranco_training_cookies_20201125_231612.json"]
+    #argv = ["../training_data/tranco_training_cookies_20201125_231612.json"]
     # argv = ["../training_data/cookiepedia_training_cookies_20201130_161942.json"]
     cargs = docopt(__doc__, argv=argv)
 
