@@ -1,0 +1,6 @@
+requests~=2.25.1
+docopt~=0.6.2
+numpy~=1.19.5
+Pebble==4.6.3
+Js2Py~=0.70
+tqdm~=4.59.0
