@@ -34,6 +34,12 @@ dependencies:
 - tabulate=0.8.7
 - tblib=1.6.0
 - wget=1.20.1
+- Js2Py=0.70
+- numpy=1.19.5
+- Pebble=4.6.3
+- requests=2.25.1
+- scikit-learn=0.24.1
+- tqdm=4.59.0
 - pip:
   - amazon-kclpy==2.0.1
   - crontab==0.22.9
