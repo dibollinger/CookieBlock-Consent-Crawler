@@ -82,7 +82,11 @@ class exists_script_tag_with_termly_embed():
                     if uuid and uuid_pattern.match(uuid):
                         return uuid
                     else:
-                        c_logmsg("TERMLY: Found termly embed banner script tag without a properly formatted id attribute.", self.browser_id, logging.WARN)
+                        uuid = e.get_attribute("data-website-uuid")
+                        if uuid and uuid_pattern.match(uuid):
+                            return uuid
+                        else:
+                            c_logmsg("TERMLY: Found termly embed banner script tag without a properly formatted id attribute.", self.browser_id, logging.WARN)
             except StaleElementReferenceException:
                 continue
 
