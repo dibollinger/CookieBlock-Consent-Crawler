@@ -37,12 +37,13 @@ from .utils.consent_commons import (CookieCategory, CrawlState, send_cookiedat_t
 onetrust_pattern_A = re.compile("(https://cdn-apac\\.onetrust\\.com)")
 onetrust_pattern_B = re.compile("(https://cdn-ukwest\\.onetrust\\.com)")
 cookielaw_base_pattern = re.compile("(https://cdn\\.cookielaw\\.org)")
+cmp_cookielaw_base_pattern = re.compile("(https://cmp-cdn\\.cookielaw\\.org)")
 optanon_base_pattern = re.compile("(https://optanon\\.blob\\.core\\.windows\\.net)")
 cookiecdn_base_pattern = re.compile("(https://cookie-cdn\\.cookiepro\\.com)")
 cookiepro_base_pattern = re.compile("(https://cookiepro\\.blob\\.core\\.windows\\.net)")
 
 base_patterns = [onetrust_pattern_A, onetrust_pattern_B,
-                 cookielaw_base_pattern, optanon_base_pattern,
+                 cookielaw_base_pattern, cmp_cookielaw_base_pattern, optanon_base_pattern,
                  cookiecdn_base_pattern, cookiepro_base_pattern]
 
 # Javascript direct links, required for Variant B
@@ -52,6 +53,8 @@ v2_onetrust_pattern_B = re.compile("https://cdn-ukwest\\.onetrust\\.com/consent/
                                   + uuid_pattern.pattern + "[a-zA-Z0-9_-]*\\.js")
 v2_cookielaw_pattern = re.compile("https://cdn\\.cookielaw\\.org/consent/"
                                   + uuid_pattern.pattern + "[a-zA-Z0-9_-]*\\.js")
+v2_cmp_cookielaw_pattern = re.compile("https://cmp-cdn\\.cookielaw\\.org/consent/"
+                                      + uuid_pattern.pattern + "[a-zA-Z0-9_-]*\\.js")
 v2_optanon_pattern = re.compile("https://optanon\\.blob\\.core\\.windows\\.net/consent/"
                                 + uuid_pattern.pattern + "[a-zA-Z0-9_-]*\\.js")
 v2_cookiepro_cdn_pattern = re.compile("https://cookie-cdn\\.cookiepro\\.com/consent/"
@@ -60,7 +63,7 @@ v2_cookiepro_blob_pattern = re.compile("https://cookiepro\\.blob\\.core\\.window
                                        + uuid_pattern.pattern + "[a-zA-Z0-9_-]*\\.js")
 
 variantB_patterns = [v2_onetrust_pattern_A, v2_onetrust_pattern_B,
-                     v2_cookielaw_pattern, v2_optanon_pattern,
+                     v2_cookielaw_pattern, v2_cmp_cookielaw_pattern, v2_optanon_pattern,
                      v2_cookiepro_cdn_pattern, v2_cookiepro_cdn_pattern]
 
 # OneTrust does not have uniform category names.
@@ -133,7 +136,7 @@ class _exists_script_tag_with_ddid():
             try:
                 # Find a script tag with the data-domain-script attribute
                 dd_id = str(e.get_attribute("data-domain-script"))
-                if (dd_id is not None) and uuid_pattern.match(str(dd_id)):
+                if (dd_id is not None) and (uuid_pattern.match(str(dd_id)) or str(dd_id) == "center-center-default-stack-global-ot"):
                     source_stub = e.get_attribute("src")
                     if source_stub is None:
                         c_logmsg(f"ONETRUST: VARIANT A: Found a script tag with the data-domain attribute, "
@@ -233,6 +236,10 @@ def _variantA_try_retrieve_ruleset_id(domain_url: str, dd_id: str,
                     continue
                 if "en" in languageset.values():
                     ids.append(("en", r["Id"]))
+                elif "en-GB" in languageset.values():
+                    ids.append(("en-gb", r["Id"]))
+                elif "en-US" in languageset.values():
+                    ids.append(("en-us", r["Id"]))
                 elif "de" in languageset.values():
                     ids.append(("de", r["Id"]))
                 else:
@@ -282,7 +289,7 @@ def _variantA_get_and_parse_json(domain_url: str, dd_id: str, ruleset_ids: List[
             elif "Culture" not in json_body["Language"]:
                 c_logmsg(f"ONETRUST: VARIANT A: Could not find \"Culture\" attribute inside decoded JSON.", browser_id, logging.WARN)
                 continue
-            elif "en" in json_body["Language"]["Culture"]:
+            elif any(lstring in json_body["Language"]["Culture"] for lstring in ["en", "en-GB", "en-US"]):
                 cat_lookup = category_lookup_en
             elif "de" in json_body["Language"]["Culture"]:
                 cat_lookup = category_lookup_de
@@ -341,6 +348,10 @@ def _variantA_get_and_parse_json(domain_url: str, dd_id: str, ruleset_ids: List[
             c_logmsg(f"ONETRUST: VARIANT A: Failed to decode json file for ruleset : {curr_ruleset_url}", browser_id, logging.ERROR)
             c_logmsg(f"ONETRUST: VARIANT A: Details: {type(ex)} -- {ex}", browser_id, logging.ERROR)
             continue
+
+        # stop after first successful ruleset
+        if cookie_count > 0:
+            break
 
     if cookie_count == 0:
         return 0, CrawlState.NO_COOKIES, f"ONETRUST: VARIANT A: Could not extract any cookies for ddid: {dd_id}."
