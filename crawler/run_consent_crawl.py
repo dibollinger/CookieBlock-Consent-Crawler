@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 OpenWPM Cookie Consent Crawler
-Copyright (c) 2021  Dino Bollinger, ETH Zürich, Information Security Group
+Copyright (c) 2021-2022  Dino Bollinger, ETH Zürich, Information Security Group
 Licensed under the GPLv3, see included LICENSE file.
 -----------------------------------------
 Uses the OpenWPM framework 0.12.0 to scrape cookie consent category labels from websites.
@@ -86,10 +86,6 @@ def setup_browser_config(browser_param: Dict) -> None:
     browser_param["ublock-origin"] = False
     browser_param["disconnect"] = False
     browser_param["tracking-protection"] = False
-
-    # automatically accept GDPR consent notices in order to load all cookies
-    # TODO: broken, however installing it in the profile directly works anyways
-    # browser_param["consentomatic"] = True
 
     # additional browser parameters
     browser_param['prefs'] = {"xpinstall.signatures.required": False,

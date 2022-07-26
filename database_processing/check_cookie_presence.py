@@ -1,9 +1,8 @@
 #!/bin/python3
-# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Copyright (C) 2021-2022 Dino Bollinger, ETH Zürich, Information Security Group
 # Released under the MIT License
 """
 Check if given cookies are found in the collected cookie database.
-
 
 Usage:
   check_registration_cookie <db_path>...
@@ -119,6 +118,3 @@ def main():
 
 if __name__ == "__main__":
     exit(main())
-
-
-

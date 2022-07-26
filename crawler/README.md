@@ -9,9 +9,11 @@
 * [OpenWPM](#openwpm)
 * [Presence Crawler](#presence-crawler)
   * [Usage](#usage-presence-crawler)
+  * [Arguments](#arguments-presence-crawler)
   * [Output](#output-presence-crawler)
 * [Consent Crawler](#consent-crawler)
   * [Usage](#usage-consent-crawler)
+  * [Arguments](#arguments-consent-crawler)
   * [Output](#output-consent-crawler)
 * [Directory Contents](#directory-contents)
 * [License](#license)
@@ -30,18 +32,17 @@ Currently supported by the scripts are the Consent Management Providers:
 
 Due to the GDPR, websites that offer their services to users connecting from countries in the
 EU are required to request consent for storing cookies on the browser. This is commonly
-accomplished using consent notices offered b Consent Management Providers.
+accomplished using consent notices offered by Consent Management Providers.
 
-These consent notices offer toggles for the visitor to accept or reject cookie
+These consent notices provide toggles for the visitor to accept or reject cookie
 categories, which can display detailed information of the purpose of each cookie.
 This crawler specifically targets consent notices that display such information,
-for the purpose of gathering a dataset of cookie labels.
+for the purpose of gathering a dataset of cookie with purposes.
 
 Each cookie is assigned to one of the following purpose classes:
 
 * __Strictly Necessary Cookies__: Cookies that are required for the website to function
-    properly. These require no consent from the visitor and usually cannot be rejected,
-    but are still declared inside privacy policies and consent management popups.
+    properly. These require no consent from the visitor and usually cannot be rejected.
 * __Functional Cookies__: Cookies that provide additional services or improve the user
     experience, but are not strictly necessarily for the website to function. This
     includes cookies such as website style settings, user preferences, etc.
@@ -52,23 +53,22 @@ Each cookie is assigned to one of the following purpose classes:
 * __Advertising/Tracking__: This category encompasses all cookies that are used for
     advertising and tracking. Often this also involves the collection of sensitive
     personal data, which may be sold to other interested parties. This is generally
-    the category of cookies where the loss of privacy is the largest concern.
-* __Uncategorized__: Some CMPs leave cookies uncategorized. This category catches
-    all such declarations.
+    the category of cookies where privacy is the biggest concern.
+* __Social Media__: Some cookies are explicitly declared as serving purposes of social media integration. These are rare, and it is difficult to distinguish these with functional or tracking cookies.
+* __Uncategorized__: Some CMPs leave cookies uncategorized.
+This category catches all such declarations.
 * __Unknown__: Catch-all for the remaining categories. Some cannot easily be
     assigned to any of the above categories. This includes category labels such as
-    "Information Storage and Access" or "Content Delivery" as these labels state
-    little about how the cookie is intended to be used.
-    In addition, some CMP use language-specific declarations.
+    "Information Storage and Access" or "Content Delivery".
 
-If a cookie has multiple purposes assigned, the tool will generally assign the less
-privacy-preserving class.
+If a cookie has multiple purposes assigned, the tool will generally assign the less privacy-preserving class.
+This is ordered from most to least privacy-preserving as {"Necessary", "Functionality", "Analytics", "Advertising"}.
 
 ## Installation
 
-OpenWPM is tested on Ubuntu 18.04 and Debian Bullseye.
+OpenWPM is tested on Ubuntu 18.04, 20.04 and Debian Bullseye.
 
-OpenWPM does not support Windows: https://github.com/mozilla/OpenWPM/issues/503
+OpenWPM 0.12.0 does not support Windows: https://github.com/mozilla/OpenWPM/issues/503
 
 ### Requirements
 
@@ -92,7 +92,6 @@ After running the install script, activate your conda environment by running:
 
     $ conda activate openwpm
 
-See `openwpm/README.md` for more detailed install instructions.
 
 ### Developer instructions
 
@@ -135,12 +134,12 @@ The official OpenWPM github repository is found at: https://github.com/mozilla/O
 
 
 ## Presence Crawler
-This is an efficient scraper that utilises the Python 'requests' library. Its purpose is to filter out
+This is an efficient scraper that utilises `pebble` and the Python `requests` library. Its purpose is to filter out
 potential candidates for the more costly OpenWPM crawl, which uses actual browser instances. It verifies
-whether the provided domains contain a Consent Management Platform from which we can extract category labels.
+whether the provided domains contain a Consent Management Provider from which we can extract category labels.
 
 ### Usage (Presence Crawler)
-While in the _"openwpm"_ _conda_ environment, run the following script with the required arguments:
+While in the _"(openwpm)"_ _conda_ environment, run the following script with the required arguments:
 
     run_presence_crawl.py (--numthreads <NUM>) (--url <u> | --pkl <fpkl> | --file <fpath> | --csv <csvpath>)... [--batches <BCOUNT>]
 
@@ -155,13 +154,14 @@ While in the _"openwpm"_ _conda_ environment, run the following script with the 
         -f --file <fpath>           Path to file containing one domain per line. Can be multiple.
         -c --csv <csvpath>          Path to csv containing domains in second column. Separator is ",". Can be multiple
 
-#### Arguments
+### Arguments (Presence Crawler)
 
-Parameter `-n` specifies the total number of parallel processes to use to perform the crawl. The more
-processes are used, the faster the crawl finishes.
+Parameter `-n` specifies the total number of parallel processes to use to perform the crawl.
+The more processes can be used, the faster the crawl finishes, but the higher the RAM and CPU usage.
 
-Parameter `-b` is used to split the input into batches. After a batch is done, the result is flushed.
-This is useful to reduce the memory impact.
+Parameter `-b` is used to split the input into batches.
+After a batch is done, the result is flushed.
+This is useful to reduce the memory impact and prevent crashes for large input sizes.
 
 ### Output (Presence-Crawler)
 
@@ -200,7 +200,7 @@ While in the _"openwpm"_ _conda_ environment, run this script with the following
         -d --use_db <DB_NAME>     Use specified database file to add rows to. Will append identities properly.
         -u --url <u>              URL string to target for crawl. Can take multiple.
         -p --pkl <fpkl>           File path to pickled list of urls to crawl. Can take multiple.
-        -f --file <fpath>         Path to file containing one URL per line Can accept multiple files.
+        -f --file <fpath>         Path to file containing one URL per line. Can accept multiple files.
         -c --csv <csvpath>        Path to csv containing domains in second column. Separator is ",". Can accept multiple.
 
     Available modes are:
@@ -210,7 +210,7 @@ While in the _"openwpm"_ _conda_ environment, run this script with the following
         * termly     : Assume website uses Termly.
         * none       : Only gather cookies, no consent labels.
 
-#### Arguments
+### Arguments (Consent Crawler)
 
 The first positional argument defines which CMP to look for and extract category labels from.
 If one specifies `all`, the crawl will look for each CMP in sequence until it finds a valid match.
@@ -280,7 +280,7 @@ This folder contains the following subfolders and scripts:
 
     `collected_data/` : This is the default target directory for the consent webcrawler output.
 
-    `crawler_profile_*/`: Contains the Firefox browser profile used with OpenWPM.
+    `crawler_profile_*/`: Contains the Firefox (~v80) browser profile used with OpenWPM. 3 different configurations are included.
                         The profile includes a pre-configured install of Consent-O-Matic that references a custom Termly ruleset found at:
                         https://github.com/dibollinger/Consent-O-Matic/blob/termly_rule/termly_rules.json
 

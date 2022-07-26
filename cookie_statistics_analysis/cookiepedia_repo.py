@@ -1,4 +1,4 @@
-# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Copyright (C) 2021-2022 Dino Bollinger, ETH Zürich, Information Security Group
 # Released under the MIT License
 """
 Takes as input an analysis file produced by cookie_stats.py in mode 6/7 and produces a lookup file.
@@ -31,4 +31,3 @@ print(f"Number of unique entries: {len(cookiepedia_knowledge)}")
 
 with open("cookiepedia_knowledge_repo.pkl", 'wb') as fd:
     pickle.dump(cookiepedia_knowledge, fd, pickle.HIGHEST_PROTOCOL)
-

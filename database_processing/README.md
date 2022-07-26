@@ -2,7 +2,7 @@
 
 This subfolder contains scripts to perform operations on the database produced by the consent label crawler.
 
-This includes altering/sanetizing the database using SQL commands as well as extracting the JSON training data 
+This includes altering/sanetizing the database using SQL commands as well as extracting the JSON training data
 from the retrieved database of cookies.
 
 ## Folder Contents
@@ -25,8 +25,8 @@ from the retrieved database of cookies.
 
 `extract_cookie_data.py`:
 
-Matches the observed cookies stored in the `javascript_cookies` table with the declarations in the `consent_data` 
-table of the given input database by name and domain. This produces a list of cookies with associated consent 
+Matches the observed cookies stored in the `javascript_cookies` table with the declarations in the `consent_data`
+table of the given input database by name and domain. This produces a list of cookies with associated consent
 label and purpose description, which can be used as input to a classifier.
 
 Any cookies that do not belong to the main 4 categories `(0: necessary, 1: functional, 2: analytics, 3: advertising)`
@@ -60,17 +60,17 @@ Output JSON structure:
  ...
 ]
 ```
-Where `variable_data` contains all updates for a single cookie. 
-    
+Where `variable_data` contains all updates for a single cookie.
+
 In addition, some statistics are also produced, such as counts of cookies per CMP.
 
 ---
 
-`post_process_db.py`: 
+`post_process_db.py`:
 
    First, backs up the database. Then, cleans empty tables out of the database and runs some sanity checks on them.
    Next, it creates a number of views inside the database to allow easier analysis of certain datapoints in the database.
-   
+
    Finally, it runs a number of queries to output a large range of statistics. This includes:
    - Total URLs visited.
    - Number of successful CMP crawls.
@@ -82,6 +82,3 @@ In addition, some statistics are also produced, such as counts of cookies per CM
    - Number of declarations in database
    - How many unique cookies and declarations
    - Cookie counts separated by purpose.
-
-## License
-

@@ -1,5 +1,5 @@
 #!/bin/python3
-# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Copyright (C) 2021-2022 Dino Bollinger, ETH Zürich, Information Security Group
 # Released under the MIT License
 """
 Matches the cookies with their labels based on name and domain, stores the resulting data in JSON format.

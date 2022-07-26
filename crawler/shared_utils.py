@@ -1,6 +1,6 @@
 """
-Shared functions for Consent and Presence crawler
-Copyright (c) 2021  Dino Bollinger, ETH Zürich, Information Security Group
+Shared functions for Consent and Presence Crawler
+Copyright (c) 2021-2022  Dino Bollinger, ETH Zürich, Information Security Group
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

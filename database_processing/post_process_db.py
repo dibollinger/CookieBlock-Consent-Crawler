@@ -1,5 +1,5 @@
 #!/bin/python3
-# Copyright (C) 2021 Dino Bollinger, ETH Zürich, Information Security Group
+# Copyright (C) 2021-2022 Dino Bollinger, ETH Zürich, Information Security Group
 # Released under the MIT License
 """
 This script runs a series of SQL commands on the specified database to remove empty tables
@@ -376,4 +376,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     exit(main())
-

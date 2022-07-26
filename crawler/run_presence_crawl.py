@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 CMP Presence Crawler
-Copyright (c) 2021  Dino Bollinger, ETH Zürich, Information Security Group
+Copyright (c) 2021-2022  Dino Bollinger, ETH Zürich, Information Security Group
 Licensed under the GPLv3, see included LICENSE file.
 -----------------------------------------
 Fast presence crawl -- does not retrieve cookie data nor CMP labels, but rather checks whether
