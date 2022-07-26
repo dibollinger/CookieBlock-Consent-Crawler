@@ -59,12 +59,13 @@ cb_base_pat = re.compile("https://consent\\.cookiebot\\.com/")
 onetrust_pattern_A = re.compile("(https://cdn-apac\\.onetrust\\.com)")
 onetrust_pattern_B = re.compile("(https://cdn-ukwest\\.onetrust\\.com)")
 cookielaw_base_pattern = re.compile("(https://cdn\\.cookielaw\\.org)")
+cmp_cookielaw_base_pattern = re.compile("(https://cmp-cdn\\.cookielaw\\.org)")
 optanon_base_pattern = re.compile("(https://optanon\\.blob\\.core\\.windows\\.net)")
 cookiecdn_base_pattern = re.compile("(https://cookie-cdn\\.cookiepro\\.com)")
 cookiepro_base_pattern = re.compile("(https://cookiepro\\.blob\\.core\\.windows\\.net)")
 
 # Tuple of the above, for iteration
-onetrust_patterns: Tuple = (onetrust_pattern_A, onetrust_pattern_B,
+onetrust_patterns: Tuple = (onetrust_pattern_A, onetrust_pattern_B, cmp_cookielaw_base_pattern,
                             cookielaw_base_pattern, optanon_base_pattern,
                             cookiecdn_base_pattern, cookiepro_base_pattern)
 
