@@ -5,7 +5,7 @@
   * [Requirements](#requirements)
   * [Install Script](#install-script)
   * [Developer Instructions](#developer-instructions)
-  * [Troubleshooting](#troubleshooting)  
+  * [Troubleshooting](#troubleshooting)
 * [OpenWPM](#openwpm)
 * [Presence Crawler](#presence-crawler)
   * [Usage](#usage-presence-crawler)
@@ -14,55 +14,54 @@
   * [Usage](#usage-consent-crawler)
   * [Output](#output-consent-crawler)
 * [Directory Contents](#directory-contents)
-* [Credits](#credits)
 * [License](#license)
 
 ## Description
 
-The crawlers in this directory allow the user to scrape websites for cookie consent 
-purposes if the target website makes use of one of the supported Consent Management Platforms.
-It automatically retrieves consent labels if possible, and if successful, browses the subpages 
-of the site to record cookie data.
+The crawlers in this directory allow the user to scrape websites for cookie consent
+purposes if the target website makes use of one of the supported Consent Management Providers (CMPs).
 
-Currently supported by the scripts are the CMPs:
+It automatically retrieves purpose categories for cookies if possible, and browses the subpages of the site to record the actual cookie data.
+
+Currently supported by the scripts are the Consent Management Providers:
 * __Cookiebot__
-* __OneTrust__ 
-* __Termly__ 
+* __OneTrust__
+* __Termly__
 
-Due to the GDPR, websites that offer their services to users connecting from countries in the 
-EU are required to request consent for storing cookies on the browser. This is commonly 
-accomplished using consent notices offered by so-called Consent Management Platforms (CMPs).
+Due to the GDPR, websites that offer their services to users connecting from countries in the
+EU are required to request consent for storing cookies on the browser. This is commonly
+accomplished using consent notices offered b Consent Management Providers.
 
 These consent notices offer toggles for the visitor to accept or reject cookie
-categories, which can display detailed information of the purpose of each cookie. 
-This crawler specifically targets consent notices that display such information, 
+categories, which can display detailed information of the purpose of each cookie.
+This crawler specifically targets consent notices that display such information,
 for the purpose of gathering a dataset of cookie labels.
 
 Each cookie is assigned to one of the following purpose classes:
 
-* __Strictly Necessary Cookies__: Cookies that are required for the website to function 
-    properly. These require no consent from the visitor and usually cannot be rejected, 
+* __Strictly Necessary Cookies__: Cookies that are required for the website to function
+    properly. These require no consent from the visitor and usually cannot be rejected,
     but are still declared inside privacy policies and consent management popups.
-* __Functional Cookies__: Cookies that provide additional services or improve the user 
-    experience, but are not strictly necessarily for the website to function. This 
-    includes cookies such as website style settings, user preferences, etc. 
-* __Performance/Analytical Cookies__: These are cookies that gather anonymized data 
-    from the user in order to report statistics of the website usage or website 
-    performance to the host. This data is used to improve the site and the browsing 
+* __Functional Cookies__: Cookies that provide additional services or improve the user
+    experience, but are not strictly necessarily for the website to function. This
+    includes cookies such as website style settings, user preferences, etc.
+* __Performance/Analytical Cookies__: These are cookies that gather anonymized data
+    from the user in order to report statistics of the website usage or website
+    performance to the host. This data is used to improve the site and the browsing
     experience for the visitors.
-* __Advertising/Tracking__: This category encompasses all cookies that are used for 
-    advertising and tracking. Often this also involves the collection of sensitive 
-    personal data, which may be sold to other interested parties. This is generally 
-    the category of cookies where the loss of privacy is the largest concern. 
+* __Advertising/Tracking__: This category encompasses all cookies that are used for
+    advertising and tracking. Often this also involves the collection of sensitive
+    personal data, which may be sold to other interested parties. This is generally
+    the category of cookies where the loss of privacy is the largest concern.
 * __Uncategorized__: Some CMPs leave cookies uncategorized. This category catches
     all such declarations.
-* __Unknown__: Catch-all for the remaining categories. Some cannot easily be 
-    assigned to any of the above categories. This includes category labels such as 
-    "Information Storage and Access" or "Content Delivery" as these labels state 
-    little about how the cookie is intended to be used. 
+* __Unknown__: Catch-all for the remaining categories. Some cannot easily be
+    assigned to any of the above categories. This includes category labels such as
+    "Information Storage and Access" or "Content Delivery" as these labels state
+    little about how the cookie is intended to be used.
     In addition, some CMP use language-specific declarations.
 
-If a cookie has multiple purposes assigned, the tool will generally assign the less 
+If a cookie has multiple purposes assigned, the tool will generally assign the less
 privacy-preserving class.
 
 ## Installation
@@ -123,7 +122,7 @@ lint all the changes before you make a commit.
    in bash). Please also add a comment to that issue to let us know you ran
    into this problem.
 
-##OpenWPM
+## OpenWPM
 
 OpenWPM is a web privacy measurement framework which makes it easy to
 collect data for privacy studies on a scale of thousands to millions
@@ -136,18 +135,18 @@ The official OpenWPM github repository is found at: https://github.com/mozilla/O
 
 
 ## Presence Crawler
-This is an efficient scraper that utilises the Python 'requests' library. Its purpose is to filter out 
-potential candidates for the more costly OpenWPM crawl, which uses actual browser instances. It verifies 
+This is an efficient scraper that utilises the Python 'requests' library. Its purpose is to filter out
+potential candidates for the more costly OpenWPM crawl, which uses actual browser instances. It verifies
 whether the provided domains contain a Consent Management Platform from which we can extract category labels.
 
 ### Usage (Presence Crawler)
 While in the _"openwpm"_ _conda_ environment, run the following script with the required arguments:
 
     run_presence_crawl.py (--numthreads <NUM>) (--url <u> | --pkl <fpkl> | --file <fpath> | --csv <csvpath>)... [--batches <BCOUNT>]
-    
+
     - The first required argument specifies the number of concurrent processes to launch to crawl domains with.
-    - The second required argument specifies the domains to crawl.  
-    
+    - The second required argument specifies the domains to crawl.
+
     Options:
         -n --numthreads <NUM>       Required. Number of processes to run in parallel.
         -b --batches <BCOUNT>       Optional. Number of batches to split the input into. More batches lessens memory impact. [Default: 1]
@@ -166,7 +165,7 @@ This is useful to reduce the memory impact.
 
 ### Output (Presence-Crawler)
 
-The presence crawl automatically attempts to find the correct URL for the given domain, and the 
+The presence crawl automatically attempts to find the correct URL for the given domain, and the
 results are dumped into the subfolder  `./filtered_urls/`. Results are split into:
 * `bot_responses`: Crawls that failed likely because a bot detection script prevented access to the website. These are HTTP errors 403 and 406.
 * `cookiebot_responses`: URLs that contain a valid Cookiebot CDN domain in its page source.
@@ -176,8 +175,8 @@ results are dumped into the subfolder  `./filtered_urls/`. Results are split int
 * `onetrust_responses`: URLs where the OneTrust CMP was found.
 * `termly_responses`: URLs where the Termly CMP was found.
 
-Note that this script does not guarantee that the resulting filtered URLs actually use the CMP that are 
-referenced on the HTML. It is still possible for the website to not have set up the CMP properly, or at all. 
+Note that this script does not guarantee that the resulting filtered URLs actually use the CMP that are
+referenced on the HTML. It is still possible for the website to not have set up the CMP properly, or at all.
 False negatives are also possible, as websites may not show all content when not loaded by an actual browser.
 
 Best used with an active VPN connection to a country currently in the EU. Due to GDPR, this increases the
@@ -185,10 +184,10 @@ chance for the consent management platform to be shown to the user. In addition,
 making crawling the data from outside the EU impossible.
 
 ## Consent Crawler
-This is the OpenWPM-based Crawler that retrieves the cookie labels with the associated cookies. 
+This is the OpenWPM-based Crawler that retrieves the cookie labels with the associated cookies.
 This script is noticeably slower than the Presence Crawl, as actual browser instances are used
 to request and browse the website. In contrast to simple GET requests, each browser takes up a
-significant chunk of memory, and uses multiple threads for a single instance. This reduces the 
+significant chunk of memory, and uses multiple threads for a single instance. This reduces the
 potential concurrency that can be achieved.
 
 ### Usage (Consent Crawler)
@@ -216,11 +215,11 @@ While in the _"openwpm"_ _conda_ environment, run this script with the following
 The first positional argument defines which CMP to look for and extract category labels from.
 If one specifies `all`, the crawl will look for each CMP in sequence until it finds a valid match.
 
-Parameter `-n` specifies the number of concurrent browsers to use. Since each Firefox browser takes 
+Parameter `-n` specifies the number of concurrent browsers to use. Since each Firefox browser takes
 up a large amount of memory and processing power, this number should be chosen conservatively.
 
-Parameter `--use_db <DB_NAME>` specifies the given SQLite database as output path. If not provided, 
-a new database will be created inside the subfolder `./collected_data`. This is useful for continuing 
+Parameter `--use_db <DB_NAME>` specifies the given SQLite database as output path. If not provided,
+a new database will be created inside the subfolder `./collected_data`. This is useful for continuing
 crawls if one was interrupted prematurely.
 
 
@@ -231,7 +230,7 @@ a large number of tables by default, the most relevant for the consent crawl are
 
 __consent_data__: Stores declared cookies collected from the consent notice, including purpose label.
 
-    TABLE consent_data  
+    TABLE consent_data
         id INTEGER PRIMARY KEY,           -- Unique record identifier.
         browser_id INTEGER NOT NULL,      -- Index of browser instance that collected the data.
         visit_id INTEGER NOT NULL,        -- A unique foreign key corresponding to the website that was targetted.
@@ -241,7 +240,7 @@ __consent_data__: Stores declared cookies collected from the consent notice, inc
         cat_name VARCHAR(256) NOT NULL,   -- Actual declared name of the purpose category. May differ from the internal category index.
         purpose TEXT,                     -- String description that specifies the purpose of the cookie. May be empty.
         expiry TEXT,                      -- Declared expiration time, given in some text metric. Can also be "Session".
-        type_name VARCHAR(256),           -- Name of the tracking technology type, as specified by Cookiebot. 
+        type_name VARCHAR(256),           -- Name of the tracking technology type, as specified by Cookiebot.
         type_id INTEGER                   -- Index of the tracking technology type. (0 == HTTP cookie; 1 == Javascript cookie; 4 == tracking pixel)
 
 
@@ -251,7 +250,7 @@ __javascript_cookies__: Stores the data of the observed cookies that were encoun
       id INTEGER PRIMARY KEY ASC,       -- Unique record identifier.
       browser_id INTEGER NOT NULL,      -- Index of browser instance that collected the data.
       visit_id INTEGER NOT NULL,        -- A unique foreign key corresponding to the website that was targetted.
-      record_type TEXT,                 -- Through what action the cookie was recorded. Either "added-or-changed" or "deleted". 
+      record_type TEXT,                 -- Through what action the cookie was recorded. Either "added-or-changed" or "deleted".
       time_stamp DATETIME               -- Timestamp on which the cookie was created.
       name TEXT,                        -- Name of the actual cookie.
       host TEXT,                        -- Origin domain of the actual cookie.
@@ -263,11 +262,11 @@ __javascript_cookies__: Stores the data of the observed cookies that were encoun
       is_session INTEGER,               -- Boolean that indicates whether it is a session cookie.
       is_secure INTEGER,                -- Boolean flag that indicates whether the cookie can only be sent over secure connections.
       same_site TEXT,                   -- Either "no_restriction", "lax" or "strict. Controls how the cookie can be accessed through cross-site links.
-   
+
 
 __consent_crawl_results__: Records whether a crawl succeeded or failed, and for what reason in the latter case.
 
-    TABLE consent_crawl_results 
+    TABLE consent_crawl_results
       id INTEGER PRIMARY KEY,                  -- Unique record identifier.
       browser_id INTEGER NOT NULL,             -- Index of the browser instance that collected the data.
       visit_id INTEGER NOT NULL,               -- A unique foreign key corresponding to the website that was targetted.
@@ -279,21 +278,21 @@ __consent_crawl_results__: Records whether a crawl succeeded or failed, and for 
 ## Directory Contents
 This folder contains the following subfolders and scripts:
 
-    `collected_data/` : This is the default target directory for the consent webcrawler output. 
-    
-    `crawler_profile_*/`: Contains the Firefox browser profile used with OpenWPM. 
-                        The profile includes a pre-configured install of Consent-O-Matic that references a custom Termly ruleset found at: 
-                        https://github.com/dibollinger/Consent-O-Matic/blob/termly_rule/termly_rules.json 
-    
+    `collected_data/` : This is the default target directory for the consent webcrawler output.
+
+    `crawler_profile_*/`: Contains the Firefox browser profile used with OpenWPM.
+                        The profile includes a pre-configured install of Consent-O-Matic that references a custom Termly ruleset found at:
+                        https://github.com/dibollinger/Consent-O-Matic/blob/termly_rule/termly_rules.json
+
     `filtered_domains/`: Target directory for the presence crawler output.
-    
+
     `logs/`: Target directory for OpenWPM log files.
-    
-    `openwpm/`: Folder that contains the modified OpenWPM codebase, version 0.12.0 
-    
-    `run_consent_crawl.py`: This script forms the entry point for the crawler that makes use of the OpenWPM framework, 
+
+    `openwpm/`: Folder that contains the modified OpenWPM codebase, version 0.12.0
+
+    `run_consent_crawl.py`: This script forms the entry point for the crawler that makes use of the OpenWPM framework,
                             which retrieves cookies, cookie categories, and builds a SQLite3 database storing this data.
-    
+
     `run_presence_crawl.py`: Efficient crawl that only utilises the python requests library.
 
 ## License
@@ -303,4 +302,3 @@ OpenWPM is licensed under GNU GPLv3, see [license](LICENSE). Additional code has
 [FourthParty](https://github.com/fourthparty/fourthparty) and
 [Privacy Badger](https://github.com/EFForg/privacybadgerfirefox), both of which
 are licensed GPLv3+.
-
