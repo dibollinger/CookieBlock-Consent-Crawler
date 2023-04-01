@@ -106,6 +106,7 @@ def check_cookiebot_presence(resp: requests.Response) -> bool:
     matchobj1 = cb_base_pat.search(psource, re.IGNORECASE)
     matchobj2 = cb_script_name.search(psource, re.IGNORECASE)
     
+    
     return matchobj1 is not None or matchobj2 is not None
 
 
