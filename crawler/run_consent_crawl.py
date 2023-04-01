@@ -15,11 +15,12 @@ Currently supports collecting data from the following CMPs:
 - Termly
 ----------------------------------------
 Usage:
-    run_consent_crawl.py (cookiebot|onetrust|termly|all|none) (--num_browsers <NUM>) (--url <u> | --pkl <fpkl> | --file <fpath> | --csv <csvpath> )... [--use_db <DB_NAME>]
+    run_consent_crawl.py (cookiebot|onetrust|termly|all|none) (--num_browsers <NUM>) (--url <u> | --pkl <fpkl> | --file <fpath> | --csv <csvpath> | --profile_tar <prof_path> )... [--use_db <DB_NAME>]
     run_consent_crawl.py --help
 
 Options:
     -n --num_browsers <NUM>   Number of browsers to use in parallel
+    --profile_tar <prof_path> Location of browser profile to be used
     -d --use_db <DB_NAME>     Use specified database file to add rows to.
     -u --url <u>              URL string to crawl
     -p --pkl <fpkl>           File path to pickled list of urls to parse
@@ -43,7 +44,7 @@ completed: int = 0
 interrupted: int = 0
 
 
-def setup_browser_config(browser_param: Dict) -> None:
+def setup_browser_config(cargs, browser_param: Dict) -> None:
     """
     Set up configuration for the given browser dictionary.
     The general idea is to have the browser be as permissive as possible towards cookies,
@@ -65,7 +66,10 @@ def setup_browser_config(browser_param: Dict) -> None:
     # tar file must be named "profile.tar.gz"
     ## Firefox profile dated 24. November 2020. May need to be replaced in the future.
     ## Comes with Consent-O-Matic preinstalled and preconfigured.
-    browser_param['profile_tar'] = "./crawler_profile_consentomatic_accept_all/"
+    if cargs["--profile_tar"]:
+        browser_param['profile_tar'] = cargs["--profile_tar"]
+    else:
+        browser_param['profile_tar'] = "./crawler_profile_consentomatic_accept_all/"
 
     # randomizes screen resolution and user agent string, only if browser profile not already set
     # since we have a fixed profile, we don't need this
@@ -123,7 +127,7 @@ def main():
     num_browsers = int(cargs["--num_browsers"])
     manager_params, browser_params = TaskManager.load_default_params(num_browsers)
     for i in range(num_browsers):
-        setup_browser_config(browser_params[i])
+        setup_browser_config(cargs, browser_params[i])
 
     # define output directories
     manager_params["output_format"] = "local"

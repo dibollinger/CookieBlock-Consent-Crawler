@@ -53,7 +53,8 @@ from shared_utils import retrieve_cmdline_urls
 logger = logging.getLogger("presence-crawl")
 
 # Cookiebot CDN domain
-cb_base_pat = re.compile("https://consent\\.cookiebot\\.com/")
+cb_base_pat = re.compile("https://consent\\.cookiebot\\.eu/")
+cb_script_name = re.compile("cb-main\\.js")
 
 # OneTrust CDNs
 onetrust_pattern_A = re.compile("(https://cdn-apac\\.onetrust\\.com)")
@@ -102,8 +103,10 @@ class QuickCrawlResult(IntEnum):
 def check_cookiebot_presence(resp: requests.Response) -> bool:
     """ Check whether Cookiebot is referenced on the website """
     psource = resp.text
-    matchobj = cb_base_pat.search(psource, re.IGNORECASE)
-    return matchobj is not None
+    matchobj1 = cb_base_pat.search(psource, re.IGNORECASE)
+    matchobj2 = cb_script_name.search(psource, re.IGNORECASE)
+    
+    return matchobj1 is not None or matchobj2 is not None
 
 
 def check_onetrust_presence(resp: requests.Response) -> bool:
