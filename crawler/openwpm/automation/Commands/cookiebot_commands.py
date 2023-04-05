@@ -176,7 +176,7 @@ def internal_cookiebot_scrape(url: str, browser_id: int, visit_id: int, sock: cl
 
     # retrieve cc.js file from cookiebot cdn domain using the requests library
     referer = _try_find_correct_referer(webdriver, browser_id, cbid, url)
-    cc_url = f"https://consent.cookiebot.com/{cbid}/cc.js?renew=false&referer={referer}&dnt=false&init=false"
+    cc_url = f"https://consent.cookiebot.com/{cbid}/cc.js?referer={referer}"
     r, crawlstate, report = simple_get_request(cc_url, browser_id=browser_id, timeout=(6, 30), headers={"Referer": url})
     if r is None:
         msg = f"COOKIEBOT: Failed to retrieve cc.js for {cc_url} -- Details: {report}"
