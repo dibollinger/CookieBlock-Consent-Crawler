@@ -1,5 +1,5 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
+set -e
 # Use the Unbranded build that corresponds to a specific Firefox version
 # To upgrade:
 #    1. Go to: https://hg.mozilla.org/releases/mozilla-release/tags.
@@ -8,30 +8,45 @@
 
 # Note this script is **destructive** and will
 # remove the existing Firefox in the OpenWPM directory
+# Update to Firefox 108 from OpenWPM release v0.21.1:
+# https://raw.githubusercontent.com/openwpm/OpenWPM/master/scripts/install-firefox.sh
 
-#TAG='bd5d1f49975deb730064a16b3079edb53c4a5f84' # FIREFOX_80_0_RELEASE
+TAG='a486bbf619936d4f8516c853ea6ffad2d576e2a3' # FIREFOX_108_0_2_RELEASE
 
 case "$(uname -s)" in
-   Darwin)
-     echo 'Mac OSX Unsupported'
-     exit 1
-     ;;
-   Linux)
-     echo 'Installing for Linux'
-     OS='linux'
-     TARGET_SUFFIX='.tar.bz2'
-     ;;
-   *)
-     echo 'Your OS is not supported. Aborting'
-     exit 1
-     ;;
+Darwin)
+  echo 'Installing for Mac OSX'
+  OS='macosx'
+  TARGET_SUFFIX='.dmg'
+  ;;
+Linux)
+  echo 'Installing for Linux'
+  OS='linux'
+  TARGET_SUFFIX='.tar.bz2'
+  ;;
+*)
+  echo 'Your OS is not supported. Aborting'
+  exit 1
+  ;;
 esac
 
-#UNBRANDED_RELEASE_BUILD="https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/gecko.v2.mozilla-release.revision.${TAG}.firefox.${OS}64-add-on-devel/artifacts/public/build/target${TARGET_SUFFIX}"
-#wget -q "$UNBRANDED_RELEASE_BUILD"
+UNBRANDED_RELEASE_BUILD="https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/gecko.v2.mozilla-release.revision.${TAG}.firefox.${OS}64-add-on-devel/artifacts/public/build/target${TARGET_SUFFIX}"
+wget -q "$UNBRANDED_RELEASE_BUILD"
 
-tar jxf ./firefox80.tar.bz2
-rm -rf firefox-bin
-mv firefox firefox-bin
+case "$(uname -s)" in
+Darwin)
+  rm -rf Nightly.app || true
+  hdiutil attach -nobrowse -mountpoint /Volumes/firefox-tmp target.dmg
+  cp -r /Volumes/firefox-tmp/Nightly.app .
+  hdiutil detach /Volumes/firefox-tmp
+  rm target.dmg
+  ;;
+Linux)
+  tar jxf target.tar.bz2
+  rm -rf firefox-bin
+  mv firefox firefox-bin
+  rm target.tar.bz2
+  ;;
+esac
 
-echo 'Firefox successfully installed'
+echo 'Firefox succesfully installed'
