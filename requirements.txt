@@ -6,3 +6,4 @@ requests~=2.25.1
 scikit-learn~=0.24.1
 sklearn~=0.0
 tqdm~=4.59.0
+tblib~=1.7.0
