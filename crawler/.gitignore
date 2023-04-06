@@ -1,5 +1,8 @@
-logs/crawl*.log
+# Crawler results
+logs/*.log
 openwpm/automation/Extension/firefox/dist/
 openwpm/automation/Extension/firefox/node_modules/
 openwpm/automation/Extension/firefox/openwpm.xpi
 openwpm/firefox-bin/
+collected_data/*.sqlite
+filtered_domains/
