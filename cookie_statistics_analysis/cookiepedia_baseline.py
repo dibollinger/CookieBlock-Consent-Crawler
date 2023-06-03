@@ -2,7 +2,7 @@
 # Released under the MIT License
 """
 Uses cookiepedia to query for cookie labels, compares it to the labels collected from the CMP.
-Computers confusion matrix and precision/recall.
+Computes confusion matrix and precision/recall.
 Requires a cookiepedia knowledge lookup dictionary to work.
 
 Usage:
