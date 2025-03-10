@@ -6,7 +6,6 @@
   * [Install Script](#install-script)
   * [Developer Instructions](#developer-instructions)
   * [Troubleshooting](#troubleshooting)
-* [OpenWPM](#openwpm)
 * [Presence Crawler](#presence-crawler)
   * [Usage](#usage-presence-crawler)
   * [Arguments](#arguments-presence-crawler)
@@ -28,7 +27,7 @@ It automatically retrieves purpose categories for cookies if possible, and brows
 Currently supported by the scripts are the Consent Management Providers:
 * __Cookiebot__
 * __OneTrust__
-* __Termly__
+* (not yet) __Termly__
 
 Due to the GDPR, websites that offer their services to users connecting from countries in the
 EU are required to request consent for storing cookies on the browser. This is commonly
@@ -66,80 +65,45 @@ This is ordered from most to least privacy-preserving as {"Necessary", "Function
 
 ## Installation
 
-OpenWPM is tested on Ubuntu 18.04, 20.04 and Debian Bullseye.
+Create a virtual environment and install all dependencies via `poetry` OR use the built docker image at `infsec-server.inf.ethz.ch/cb-cc/crawler` (when connected to the ETH network):
 
-OpenWPM 0.12.0 does not support Windows: https://github.com/mozilla/OpenWPM/issues/503
+```python
+python -m venv .venv
+source .venv/bin/activate
+pip install poetry
+source .venv/bin/activate
+poetry install
+```
 
-### Requirements
-
-The main pre-requisite for OpenWPM is conda, a cross-platform package management tool.
-
-Conda is open-source, and can be installed from https://docs.conda.io/en/latest/miniconda.html.
-
-### Install Script
-
-An installation script, `install.sh` is included to: install the conda environment,
-install unbranded firefox, and build the instrumentation extension.
-
-All installation is confined to your conda environment and should not affect your machine.
-The installation script will, however, override any existing conda environment named openwpm.
-
-To run the install script, run
-
-    $ ./openwpm/install.sh
-
-After running the install script, activate your conda environment by running:
-
-    $ conda activate openwpm
-
+Afterwards make sure to have chrome installed via `./install_uc.sh`
 
 ### Developer instructions
 
-Dev dependencies are installed by using the main `environment.yaml` (which
-is used by `./install.sh` script).
+## Upgrading chrome
+* Find branch-position on https://chromiumdash.appspot.com/releases?platform=Linux by clicking on a desired version
+* Search branch-position folder on https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Linux_x64/
+    * There exists a search field but the
+    * branch position may be off by +- 10. This can be accounted for by removing the last digit from the exact branch position
+* Update download links in `./install_uc.sh` for the file `chromedriver_linux64.zip` and `chrome-linux.zip`
 
-You can install pre-commit hooks install the hooks by running `pre-commit install` to
-lint all the changes before you make a commit.
+## Creating a profile
+* Run `run_consent_crawl_uc.py` with `--launch-browser`
+* Now you can make adjustments to the profile or the settings of the browser
+* When finished (Ctrl+C in the terminal) one can create an archive via
+    * ` tar -acf profile_NAME.tar.gz chrome_profile`
+* This file can then later be used via the `--profile_tar` argument
 
 ### Troubleshooting
 
-1. `make` / `gcc` may need to be installed in order to build the web extension.
-   On Ubuntu, this is achieved with `apt-get install make`. On OSX the necessary
-   packages are part of xcode: `xcode-select --install`.
-2. On a very sparse operating system additional dependencies may need to be
-   installed. See the [Dockerfile](Dockerfile) for more inspiration, or open
-   an issue if you are still having problems.
-3. If you see errors related to incompatible or non-existing python packages,
-   try re-running the file with the environment variable
-   `PYTHONNOUSERSITE` set. E.g., `PYTHONNOUSERSITE=True python demo.py`.
-   If that fixes your issues, you are experiencing
-   [issue 689](https://github.com/mozilla/OpenWPM/issues/689), which can be
-   fixed by clearing your
-   python [user site packages directory](https://www.python.org/dev/peps/pep-0370/),
-   by prepending `PYTHONNOUSERSITE=True` to a specific command, or by setting
-   the environment variable for the session (e.g., `export PYTHONNOUSERSITE=True`
-   in bash). Please also add a comment to that issue to let us know you ran
-   into this problem.
-
-## OpenWPM
-
-OpenWPM is a web privacy measurement framework which makes it easy to
-collect data for privacy studies on a scale of thousands to millions
-of websites. OpenWPM is built on top of Firefox, with automation provided
-by Selenium. It includes several hooks for data collection.
-
-The original publication on OpenWPM can be found here: [publication](http://randomwalker.info/publications/OpenWPM_1_million_site_tracking_measurement.pdf)
-
-The official OpenWPM github repository is found at: https://github.com/mozilla/OpenWPM
-
+`Nothing yet`
 
 ## Presence Crawler
 This is an efficient scraper that utilises `pebble` and the Python `requests` library. Its purpose is to filter out
-potential candidates for the more costly OpenWPM crawl, which uses actual browser instances. It verifies
+potential candidates for the more costly crawl with a real browser, which uses actual browser instances. It verifies
 whether the provided domains contain a Consent Management Provider from which we can extract category labels.
 
 ### Usage (Presence Crawler)
-While in the _"(openwpm)"_ _conda_ environment, run the following script with the required arguments:
+The script at `crawler/run_presence_crawl.py` accepts the following arguments:
 
     run_presence_crawl.py (--numthreads <NUM>) (--url <u> | --pkl <fpkl> | --file <fpath> | --csv <csvpath>)... [--batches <BCOUNT>]
 
@@ -184,31 +148,36 @@ chance for the consent management platform to be shown to the user. In addition,
 making crawling the data from outside the EU impossible.
 
 ## Consent Crawler
-This is the OpenWPM-based Crawler that retrieves the cookie labels with the associated cookies.
+This is the undetected-chromedriver Crawler that retrieves the cookie labels with the associated cookies.
 This script is noticeably slower than the Presence Crawl, as actual browser instances are used
-to request and browse the website. In contrast to simple GET requests, each browser takes up a
+to request and browse the websites. In contrast to simple GET requests, each browser takes up a
 significant chunk of memory, and uses multiple threads for a single instance. This reduces the
 potential concurrency that can be achieved.
 
 ### Usage (Consent Crawler)
-While in the _"openwpm"_ _conda_ environment, run this script with the following arguments:
+The script at `./run_consent_crawl_uc.py` accepts the following arguments:
 
-    run_consent_crawl.py (cookiebot|onetrust|termly|all|none) (--num_browsers <NUM>) (--url <u> | --pkl <fpkl> | --file <fpath> | --csv <csvpath> )... [--use_db <DB_NAME>]
+usage: run_consent_crawl_uc.py [-h] (-f FILE | --launch-browser | --url URL) [-n NUM_BROWSERS]
+        [-d USE_DB] [--profile_tar PROFILE_TAR] [--no-headless] [--no-stdout]
+        [--num-subpages NUM_SUBPAGES] [--timeout TIMEOUT]
 
-    Options:
-        -n --num_browsers <NUM>   Number of browser instances to use in parallel.
-        -d --use_db <DB_NAME>     Use specified database file to add rows to. Will append identities properly.
-        -u --url <u>              URL string to target for crawl. Can take multiple.
-        -p --pkl <fpkl>           File path to pickled list of urls to crawl. Can take multiple.
-        -f --file <fpath>         Path to file containing one URL per line. Can accept multiple files.
-        -c --csv <csvpath>        Path to csv containing domains in second column. Separator is ",". Can accept multiple.
+options:
+  -h, --help            show this help message and exit
+  -f FILE, --file FILE  Path to file containing one URL per line
+  --launch-browser      Only launches the browser which allows modification of the current profile
+  -u --url URL          Url to crawl once
+  -n NUM_BROWSERS, --num-browsers NUM_BROWSERS
+                        Number of browsers to use in parallel
+  -d USE_DB, --use-db USE_DB
+                        Use specified database file to add rows to. Format: DATA_PATH/FILENAME.sqlite
+  --profile_tar PROFILE_TAR
+                        Location of a tar file containing the browser profile
+  --no-headless         Start the browser with GUI (headless disabled)
+  --no-stdout           Do not print crawl results to stdout
+  --num-subpages NUM_SUBPAGES
+                        Amount of links to follow when visiting a domain
+  --timeout TIMEOUT     Amount of seconds to spend on one website
 
-    Available modes are:
-        * all        : Try to detect which CMP is used on the website, then retrieve data for that CMP.
-        * cookiebot  : Assume website uses Cookiebot.
-        * onetrust   : Assume website uses OneTrust.
-        * termly     : Assume website uses Termly.
-        * none       : Only gather cookies, no consent labels.
 
 ### Arguments (Consent Crawler)
 
@@ -280,25 +249,25 @@ This folder contains the following subfolders and scripts:
 
     `collected_data/` : This is the default target directory for the consent webcrawler output.
 
-    `crawler_profile_*/`: Contains the Firefox (~v80) browser profile used with OpenWPM. 3 different configurations are included.
-                        The profile includes a pre-configured install of Consent-O-Matic that references a custom Termly ruleset found at:
-                        https://github.com/dibollinger/Consent-O-Matic/blob/termly_rule/termly_rules.json
+    `chrome_profile/`:  Contains the chrome profile data. The following profiles can be downloaded and extracted into this folder:
+            * https://sybilmail.de/files/cookieblock/profile_consentomatic_accept_all.tar.gz
+            * https://sybilmail.de/files/cookieblock/profile_consentomatic_accept_none.tar.gz
+            * https://sybilmail.de/files/cookieblock/profile_consentomatic_without_consentomatic.tar.gz
 
     `filtered_domains/`: Target directory for the presence crawler output.
 
-    `logs/`: Target directory for OpenWPM log files.
+    `logs/`: Target directory for log files.
 
-    `openwpm/`: Folder that contains the modified OpenWPM codebase, version 0.12.0
-
-    `run_consent_crawl.py`: This script forms the entry point for the crawler that makes use of the OpenWPM framework,
-                            which retrieves cookies, cookie categories, and builds a SQLite3 database storing this data.
+    `run_consent_crawl_uc.py`: This script forms the entry point for the crawler that makes use of the Selenium library to instrument
+                               a real browser. This crawler retrieves cookies, cookie categories, and builds a SQLite3 database from the
+                               collected data.
 
     `run_presence_crawl.py`: Efficient crawl that only utilises the python requests library.
 
 ## License
 The additions made to this framework (instrumentation, crawling scripts) are licensed under GNU GPLv3, see LICENSE.
 
-OpenWPM is licensed under GNU GPLv3, see [license](LICENSE). Additional code has been included from
+Code has been included from
 [FourthParty](https://github.com/fourthparty/fourthparty) and
 [Privacy Badger](https://github.com/EFForg/privacybadgerfirefox), both of which
 are licensed GPLv3+.

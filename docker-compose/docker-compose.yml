@@ -1,0 +1,44 @@
+
+###############################################################################
+# This file is the docker-compose used for crawls.
+# Adapt the -n argument in the service 'crawler' command for more or less
+# parallelism.
+# Create file 'list.txt' next to this file. This defines the URLs that will be crawled.
+# Currently only Cookiebot and Onetrust is supported.
+# Run: `docker compose up` in this files parent directory.
+# The trainingdata.json will be in ./output_trainingdata/
+###############################################################################
+
+services:
+  crawler:
+    restart: "no"
+    image: infsec-server.inf.ethz.ch/cb-cc/crawler:0.33
+    command: >
+      sh -c "\
+              presence_crawl --numthreads 256 -f list.txt --batches 100 && \
+              cat ./filtered_domains/cookiebot_responses.txt > ./consent_crawl_list.txt && \
+              cat ./filtered_domains/onetrust_responses.txt >> ./consent_crawl_list.txt && \
+              consent_crawl -n 12 \\
+                            --profile-tar profile_consentomatic_accept_all.tar.gz \\
+                            --file ./consent_crawl_list.txt \\
+                            --use-db ./collected_data/crawl.sqlite \\
+                            --batch-size 1000 && \
+              python /crawler/database_processing/extract_cookies_from_db.py ./collected_data/crawl.sqlite && \
+              cp ./training_data_output/*.json ./output_trainingdata/ && \
+              ls -lah"
+    stop_grace_period: 1m           # Leaves some time to stop the crawler
+    stop_signal: SIGINT             # Same as Ctrl+C
+    volumes:
+      - ./list.txt:/crawler/list.txt
+      - ./collected_data/:/crawler/collected_data
+      - ./filtered_domains/:/crawler/filtered_domains
+      - ./output_trainingdata/:/crawler/output_trainingdata
+    shm_size: 4gb                   # Needed by chrome/chromedriver
+    hostname: cb-cc-crawler
+
+networks:
+  cb-cc-open:
+    name: cb-cc-open
+    internal: false
+    ipam:
+      driver: default

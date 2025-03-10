@@ -1,0 +1,48 @@
+[tool.poetry]
+name = "CookieBlock-consent-crawler"
+version = "0.35-dev"
+description = "A webcrawler used to gather cookie data from websites as well as their corresponding cookie notices"
+authors = ["Karel Kubicek", "Dino Bollinger", "David Bernhard"]
+readme = "README.md"
+
+packages = [{ include = "crawler" }]
+
+[tool.poetry.scripts]
+presence_crawl = "crawler.run_presence_crawl:main"
+consent_crawl = "crawler.run_consent_crawl_uc:main"
+
+[tool.poetry.dependencies]
+tqdm = "^4.66.4"
+python = "^3.12"
+tblib = "^3.0.0"
+scikit-learn = "^1.5.0"
+requests = "^2.32.2"
+pebble = "^5.0.7"
+psutil = "^6.0.0"
+pillow = "^10.3.0"
+domain-utils = "^0.7.1"
+undetected-chromedriver = "^3.5.5"
+hyperlink = "^21.0.0"
+selenium-stealth = "^1.0.6"
+selenium-wire = "^5.1.0"
+blinker = "<1.8.0"
+alembic = "^1.13.1"
+bs4 = "^0.0.2"
+psycopg2 = "^2.9.9"
+html2text = "^2024.2.26"
+docopt = "^0.6.2"
+types-pymysql = "^1.1.0.20240524"
+types-requests = "^2.32.0.20240622"
+selenium = "4.24.0"
+ftfy = "^6.2.0"
+pqdm = "^0.2.0"
+matplotlib = "^3.10.0"
+
+[tool.poetry.group.test.dependencies]
+mypy = "^1.10.1"
+pytest = "^8.2.2"
+pytest-cov = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

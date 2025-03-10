@@ -13,7 +13,8 @@
 
 This repository contains code for two webcrawlers that were used to gather cookie
 data from websites, and to extract usage purpose for those cookies from corresponding
-cookie notices. These crawlers enabled the collection of training data for the
+cookie notices.
+These crawlers enabled the collection of training data for the
 tree ensemble model used in the CookieBlock browser extension.
 
 ### CookieBlock
@@ -35,24 +36,20 @@ The repository is split into two web crawler types, as well as some additional s
 
 ### Main Crawler Scripts
 
-In the subfolder `crawler`, two webcrawlers can be found:
-* One is designated as __"CMP Presence Crawler"__ which uses the Python `requests` library to quickly detect whether a website uses a cookie consent library from one of three different Consent Management Providers (CMP).
-This crawler serves as a first pass to filter domains that cannot be used for extracting useful data in the slower, OpenWPM-based crawl.
-* The second is designated as the __"Consent Crawler"__, which uses the OpenWPM framework to extract both cookies and their corresponding usage purposes if found.
-This process uses actual Firefox browser instances to browse websites and gather cookies.
-The process is slow, but it's the best method for collecting cookie data required for training a predictor.
+The file `crawler/run_presence_crawl.py` has the purpose:
+* This is designated as __"CMP Presence Crawler"__ which uses the Python `requests` library to quickly detect whether a website uses a cookie consent library from one of three different Consent Management Providers (CMP).
+* This crawler serves as a first pass to filter domains that cannot be used for extracting useful data in the slower __"Consent Crawler"__ crawl .
+
+The file `crawler/run_consent_crawl_uc.py` resembles the second part:
+* It is designated as the __"Consent Crawler"__, which uses a chrome browser to extract both cookies and their corresponding usage purposes if found.
+* The process is slow, but it's the best method for collecting cookie data required for training a predictor.
 
 Currently, the web crawlers support cookie banners from the following Consent Management Providers:
 * Cookiebot
 * OneTrust (includes OptAnon, CookiePro and CookieLaw)
-* Termly
-
-The consent crawler is based on OpenWPM v0.12.0 by _Steven Englehardt et al._, which can be found at:
-
-https://github.com/mozilla/OpenWPM
+* (Not yet supported) Termly
 
 It also uses a fork of the Consent-O-Matic extension by _Janus Bager Kristensen et al._ to automatically provide affirmative consent to cookie banners.
-
 This allows the web crawler to gather more cookies than would normally be possible.
 
 Its source can be found at:
@@ -70,6 +67,7 @@ The repository contains additional subfolders with utility data that are related
   test the crawler, and some scripts to retrieve domain sources and filter out duplicate domains.
 * The folder `database_processing` offers scripts to further process the databases collected by the
   consent crawler, and to extract a JSON formatted file of each unique cookie in the database.
+  * The file `extract_cookies_from_db.py` is used to generate a JSON file which can be used as trainingdata
 * The scripts in `cookie_statistics_analysis` uses the JSON file produced through `extract_cookies_from_db.py` to compute several statistics from the collected cookies. It also contains scripts that were used to automatically query cookie categories from Cookiepedia.
 
 For more details, please refer to their respective READMEs:
@@ -82,11 +80,11 @@ For more details, please refer to their respective READMEs:
 __Collaborators:__
 * Dino Bollinger
 * Karel Kubíček
+* David Bernhard
 * Dr. Carlos Cotrini
 * Prof. Dr. David Basin
 
 __Additional Thanks:__
-* [Authors of OpenWPM](https://github.com/mozilla/OpenWPM) (v0.12.0, Copyright © 2015 Steven Englehardt)
 * [Authors of Consent-O-Matic](https://github.com/cavi-au/Consent-O-Matic) (1.0.8, r431, Copyright © 2020-2022 Janus Bager Kristensen, Rolf Bagge, CAVI)
 * Information Security Group at ETH Zürich
 
@@ -118,7 +116,7 @@ https://karelkubicek.github.io/post/cookieblock
 
 ## License
 
-__Copyright © 2021-2022 Dino Bollinger, Karel Kubíček__
+__Copyright © 2021-2022 Dino Bollinger, Karel Kubíček, David Bernhard__
 
 All code and data contained within the `crawler/` folder is licensed under GPLv3 license.
 

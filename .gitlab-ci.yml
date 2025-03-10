@@ -1,0 +1,57 @@
+stages:
+  - build
+  - tests
+
+
+# First, we need to build the docker container based on the Dockerfile and then push it to our private registry
+# we only rebuild on relevant changes (code gets mounted anyway)
+test_container_building:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.20.1-debug
+    entrypoint: [ "" ]
+  script:
+    - echo "{\"auths\":{\"https://infsec-server.inf.ethz.ch\":{\"auth\":\"Y3Jhd2xlcjpjcmF3bGVy\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --skip-unused-stages
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "infsec-server.inf.ethz.ch/cb-cc/crawler-cicd:b-${CI_COMMIT_BRANCH}"
+  rules:
+    - changes:
+        - .gitlab-ci.yml
+        - .dockerignore
+        - Dockerfile
+        - poetry.lock
+        - install_uc.sh
+
+# Run pytests of this project
+tests:
+  stage: tests
+  image:
+    name: infsec-server.inf.ethz.ch/cb-cc/crawler-cicd:b-$CI_COMMIT_BRANCH
+    entrypoint: [ "" ]
+  script:
+    - python --version
+    - rm -f coverage.xml
+    - echo "Static type checking"
+    - ./scripts/run-tests.sh
+
+# This creates a docker image from each tag with the git tagname as the container tagname
+# The built image gets published on infsec-server.inf.ethz.ch
+build_release:
+  only:
+    - tags
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.20.1-debug
+    entrypoint: [""]
+  script:
+    - echo "{\"auths\":{\"https://infsec-server.inf.ethz.ch\":{\"auth\":\"Y3Jhd2xlcjpjcmF3bGVy\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --skip-tls-verify
+      --target production
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "infsec-server.inf.ethz.ch/cb-cc/crawler:${CI_COMMIT_TAG}"
+

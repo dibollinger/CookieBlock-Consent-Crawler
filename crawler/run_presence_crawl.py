@@ -35,7 +35,7 @@ import requests
 import requests.exceptions as rexcepts
 from docopt import docopt
 
-from pebble import ProcessPool
+from pebble import ThreadPool
 from pebble.common import ProcessExpired
 
 import logging
@@ -48,7 +48,7 @@ from urllib.parse import urlparse
 from typing import List, Tuple, Optional, Dict, Any
 from concurrent.futures import TimeoutError as CTimeoutError
 
-from shared_utils import retrieve_cmdline_urls
+from crawler.shared_utils import retrieve_cmdline_urls
 
 logger = logging.getLogger("presence-crawl")
 
@@ -71,11 +71,11 @@ onetrust_patterns: Tuple = (onetrust_pattern_A, onetrust_pattern_B, cmp_cookiela
                             cookiecdn_base_pattern, cookiepro_base_pattern)
 
 # Termly CDN domain
-termly_url_pattern = re.compile("https://app\\.termly\\.io/")
+from crawler.cmps.termly import termly_url_pattern
 
 # timeout in seconds
-connect_timeout = 60  # how long to connect at most
-load_timeout = 60     # how long to wait for website content
+connect_timeout = 120  # how long to connect at most
+load_timeout = 120     # how long to wait for website content
 parse_timeout = 120
 
 # Toggle for checking for CMPs. Set this to "False" to only perform reachability check.
@@ -164,7 +164,7 @@ def run_reachability_check(input_domain: str) -> Tuple[Optional[str], int]:
 
         try:
             # fake chrome user agent
-            headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
+            headers = {'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
             r = requests.get(completed_url, timeout=(connect_timeout, load_timeout), headers=headers)
         except (rexcepts.TooManyRedirects, rexcepts.SSLError,
                 rexcepts.URLRequired, rexcepts.MissingSchema) as ex:
@@ -316,8 +316,8 @@ def main():
 
     # split generator computation
     num_sites = len(sites)
-    splits = int(cargs["--batches"])
-    chunksize = num_sites // splits
+    splits = min(int(cargs["--batches"]), num_sites)
+    chunksize = num_sites // splits if num_sites >= splits else 1
     chunks = (sites[i:min(i+chunksize, num_sites)] for i in range(0, num_sites, chunksize))
 
     outdir = "./filtered_domains"
@@ -330,7 +330,7 @@ def main():
     finished_domains = set()
 
     try:
-        with ProcessPool(num_threads) as pool:
+        with ThreadPool(num_threads) as pool:
             crawled_site_batch: List[Tuple]
             for c in chunks:
                 cr_count = 0
